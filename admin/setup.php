@@ -96,63 +96,63 @@ if (!class_exists('FormSetup')) {
 
 $formSetup = new FormSetup($db);
 
-
-// HTTP HOST
-$item = $formSetup->newItem('NO_PARAM_JUST_TEXT');
-$item->fieldOverride = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
-$item->cssClass = 'minwidth500';
-
-// Setup conf FORMULEVOYAGE_MYPARAM1 as a simple string input
-$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM1');
-$item->defaultFieldValue = 'default value';
-
-// Setup conf FORMULEVOYAGE_MYPARAM2 as a simple textarea input but we replace the text of field title
-$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM2');
-$item->nameText = $item->getNameText().' more html text ';
-
-// Setup conf FORMULEVOYAGE_MYPARAM3
-$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM3');
-$item->setAsThirdpartyType();
-
-// Setup conf FORMULEVOYAGE_MYPARAM4 : exemple of quick define write style
-$formSetup->newItem('FORMULEVOYAGE_MYPARAM4')->setAsYesNo();
-
-// Setup conf FORMULEVOYAGE_MYPARAM5
-$formSetup->newItem('FORMULEVOYAGE_MYPARAM5')->setAsEmailTemplate('thirdparty');
-
-// Setup conf FORMULEVOYAGE_MYPARAM6
-$formSetup->newItem('FORMULEVOYAGE_MYPARAM6')->setAsSecureKey()->enabled = 0; // disabled
-
-// Setup conf FORMULEVOYAGE_MYPARAM7
-$formSetup->newItem('FORMULEVOYAGE_MYPARAM7')->setAsProduct();
-
-$formSetup->newItem('Title')->setAsTitle();
-
-// Setup conf FORMULEVOYAGE_MYPARAM8
-$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM8');
-$TField = array(
-	'test01' => $langs->trans('test01'),
-	'test02' => $langs->trans('test02'),
-	'test03' => $langs->trans('test03'),
-	'test04' => $langs->trans('test04'),
-	'test05' => $langs->trans('test05'),
-	'test06' => $langs->trans('test06'),
-);
-$item->setAsMultiSelect($TField);
-$item->helpText = $langs->transnoentities('FORMULEVOYAGE_MYPARAM8');
-
-
-// Setup conf FORMULEVOYAGE_MYPARAM9
-$formSetup->newItem('FORMULEVOYAGE_MYPARAM9')->setAsSelect($TField);
-
-
-// Setup conf FORMULEVOYAGE_MYPARAM10
-$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM10');
-$item->setAsColor();
-$item->defaultFieldValue = '#FF0000';
-$item->nameText = $item->getNameText().' more html text ';
-$item->fieldInputOverride = '';
-$item->helpText = $langs->transnoentities('AnHelpMessage');
+//
+//// HTTP HOST
+//$item = $formSetup->newItem('NO_PARAM_JUST_TEXT');
+//$item->fieldOverride = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
+//$item->cssClass = 'minwidth500';
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM1 as a simple string input
+//$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM1');
+//$item->defaultFieldValue = 'default value';
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM2 as a simple textarea input but we replace the text of field title
+//$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM2');
+//$item->nameText = $item->getNameText().' more html text ';
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM3
+//$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM3');
+//$item->setAsThirdpartyType();
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM4 : exemple of quick define write style
+//$formSetup->newItem('FORMULEVOYAGE_MYPARAM4')->setAsYesNo();
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM5
+//$formSetup->newItem('FORMULEVOYAGE_MYPARAM5')->setAsEmailTemplate('thirdparty');
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM6
+//$formSetup->newItem('FORMULEVOYAGE_MYPARAM6')->setAsSecureKey()->enabled = 0; // disabled
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM7
+//$formSetup->newItem('FORMULEVOYAGE_MYPARAM7')->setAsProduct();
+//
+//$formSetup->newItem('Title')->setAsTitle();
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM8
+//$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM8');
+//$TField = array(
+//	'test01' => $langs->trans('test01'),
+//	'test02' => $langs->trans('test02'),
+//	'test03' => $langs->trans('test03'),
+//	'test04' => $langs->trans('test04'),
+//	'test05' => $langs->trans('test05'),
+//	'test06' => $langs->trans('test06'),
+//);
+//$item->setAsMultiSelect($TField);
+//$item->helpText = $langs->transnoentities('FORMULEVOYAGE_MYPARAM8');
+//
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM9
+//$formSetup->newItem('FORMULEVOYAGE_MYPARAM9')->setAsSelect($TField);
+//
+//
+//// Setup conf FORMULEVOYAGE_MYPARAM10
+//$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM10');
+//$item->setAsColor();
+//$item->defaultFieldValue = '#FF0000';
+//$item->nameText = $item->getNameText().' more html text ';
+//$item->fieldInputOverride = '';
+//$item->helpText = $langs->transnoentities('AnHelpMessage');
 //$item->fieldValue = '';
 //$item->fieldAttr = array() ; // fields attribute only for compatible fields like input text
 //$item->fieldOverride = false; // set this var to override field output will override $fieldInputOverride and $fieldOutputOverride too
@@ -316,11 +316,11 @@ if ($action == 'edit') {
 $moduledir = 'formulevoyage';
 $myTmpObjects = array();
 // TODO Scan list of objects
-$myTmpObjects['myobject'] = array('label'=>'MyObject', 'includerefgeneration'=>0, 'includedocgeneration'=>0, 'class'=>'MyObject');
-
+$myTmpObjects['Formule'] = array('label'=>'formule', 'includerefgeneration'=>1, 'includedocgeneration'=>0, 'class'=>'formule');
 
 foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
-	if ($myTmpObjectArray['includerefgeneration']) {
+    $myTmpObjectArray['includerefgeneration'] = 1;
+    if ($myTmpObjectArray['includerefgeneration']) {
 		/*
 		 * Orders Numbering model
 		 */
@@ -338,18 +338,17 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 		print '</tr>'."\n";
 
 		clearstatcache();
+        foreach ($dirmodels as $reldir) {
+            $dir = dol_buildpath($reldir."core/modules/".$moduledir);
 
-		foreach ($dirmodels as $reldir) {
-			$dir = dol_buildpath($reldir."core/modules/".$moduledir);
+            if (is_dir($dir)) {
+                $handle = opendir($dir);
+                if (is_resource($handle)) {
+                    while (($file = readdir($handle)) !== false) {
+                        if (strpos($file, 'mod_'.strtolower($myTmpObjectKey).'_') === 0 && substr($file, dol_strlen($file) - 3, 3) == 'php') {
+                            $file = substr($file, 0, dol_strlen($file) - 4);
 
-			if (is_dir($dir)) {
-				$handle = opendir($dir);
-				if (is_resource($handle)) {
-					while (($file = readdir($handle)) !== false) {
-						if (strpos($file, 'mod_'.strtolower($myTmpObjectKey).'_') === 0 && substr($file, dol_strlen($file) - 3, 3) == 'php') {
-							$file = substr($file, 0, dol_strlen($file) - 4);
-
-							require_once $dir.'/'.$file.'.php';
+                            require_once $dir.'/'.$file.'.php';
 
 							$module = new $file($db);
 
