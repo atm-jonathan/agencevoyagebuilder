@@ -316,8 +316,7 @@ if ($action == 'edit') {
 $moduledir = 'formulevoyage';
 $myTmpObjects = array();
 // TODO Scan list of objects
-$myTmpObjects['formule'] = array('label'=>'formule', 'includerefgeneration'=>1, 'includedocgeneration'=>0, 'class'=>'formule');
-
+$myTmpObjects['Formule'] = array('includerefgeneration'=>1, 'includedocgeneration'=>0, 'class'=>'formule');
 foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
     $myTmpObjectArray['includerefgeneration'] = 1;
     if ($myTmpObjectArray['includerefgeneration']) {

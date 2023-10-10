@@ -1023,15 +1023,15 @@ class Formule extends CommonObject
 		global $langs, $conf;
 		$langs->load("formulevoyage@formulevoyage");
 
-		if (!getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON')) {
-			$conf->global->FORMULEVOYAGE_MYOBJECT_ADDON = 'mod_formule_standard';
+		if (!getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')) {
+			$conf->global->FORMULEVOYAGE_FORMULE_ADDON = 'mod_formule_standard';
 		}
 
-		if (getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON')) {
+		if (getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')) {
 			$mybool = false;
 
-			$file = getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON').".php";
-			$classname = getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON');
+			$file = getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON').".php";
+			$classname = getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON');
 
 			// Include file with class
 			$dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
