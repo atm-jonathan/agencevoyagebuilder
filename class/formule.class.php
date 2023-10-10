@@ -239,11 +239,12 @@ class Formule extends CommonObject
 	 */
 	public function create(User $user, $notrigger = false)
 	{
-        if (strlen(GETPOST('description', 'aZ09')) < 5 ){
-            setEventMessage('Description de la formule trop courte, 5 caractère minimum', 'errors');
+        $lengthOk = Formule::requireLenghtInput(GETPOST('description', 'aZ09'));
+        if ($lengthOk){
+            $resultcreate = $this->createCommon($user, $notrigger);
+        }else{
             return 0;
         }
-		$resultcreate = $this->createCommon($user, $notrigger);
 		//$resultvalidate = $this->validate($user, $notrigger);
 		return $resultcreate;
 	}
@@ -464,7 +465,12 @@ class Formule extends CommonObject
 	 */
 	public function update(User $user, $notrigger = false)
 	{
-		return $this->updateCommon($user, $notrigger);
+        $lengthOk = Formule::requireLenghtInput(GETPOST('description', 'aZ09'));
+        if ($lengthOk){
+            return $this->updateCommon($user, $notrigger);
+        }else{
+            return 0;
+        }
 	}
 
 	/**
@@ -1138,7 +1144,22 @@ class Formule extends CommonObject
 
 		return $error;
 	}
+
+    /**
+     * Send a message and stop
+     * @param string $input
+     * @return int  1 if OK, 0 if KO
+     */
+    public static function requireLenghtInput(string $input) {
+        if (strlen($input) < 5 ){
+            setEventMessage('Description de la formule trop courte, 5 caractère minimum', 'errors');
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 }
+
 
 
 require_once DOL_DOCUMENT_ROOT.'/core/class/commonobjectline.class.php';
