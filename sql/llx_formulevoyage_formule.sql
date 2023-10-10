@@ -17,7 +17,8 @@
 CREATE TABLE llx_formulevoyage_formule(
 	-- BEGIN MODULEBUILDER FIELDS
 	rowid integer AUTO_INCREMENT PRIMARY KEY NOT NULL, 
-	ref varchar(128) DEFAULT '(PROV)' NOT NULL, 
+	ref varchar(128) DEFAULT '(PROV)' NOT NULL,
+    entity integer DEFAULT 1,
 	description text NOT NULL, 
 	note_public text, 
 	note_private text, 

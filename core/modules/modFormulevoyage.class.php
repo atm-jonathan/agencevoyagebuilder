@@ -179,7 +179,8 @@ class modFormulevoyage extends DolibarrModules
 		// Example:
 		// $this->tabs[] = array('data'=>'objecttype:+tabname1:Title1:mylangfile@formulevoyage:$user->rights->formulevoyage->read:/formulevoyage/mynewtab1.php?id=__ID__');  					// To add a new tab identified by code tabname1
 		// $this->tabs[] = array('data'=>'objecttype:+tabname2:SUBSTITUTION_Title2:mylangfile@formulevoyage:$user->rights->othermodule->read:/formulevoyage/mynewtab2.php?id=__ID__',  	// To add another new tab identified by code tabname2. Label will be result of calling all substitution functions on 'Title2' key.
-		// $this->tabs[] = array('data'=>'objecttype:-tabname:NU:conditiontoremove');                                                     										// To remove an existing tab identified by code tabname
+//		$this->tabs[] = array('data'=>'Formule:-Contacts');
+
 		//
 		// Where objecttype can be
 		// 'categories_x'	  to add a tab in category view (replace 'x' by type of category (0=product, 1=supplier, 2=customer, 3=member)
@@ -355,7 +356,7 @@ class modFormulevoyage extends DolibarrModules
             'type'=>'left',			                // This is a Left menu entry
             'titre'=>'Nouvelle Formule',
             'mainmenu'=>'formulevoyage',
-            'leftmenu'=>'formulevoyage',
+            'leftmenu'=>'formulevoyage_new',
             'url'=>'/formulevoyage/formule_card.php?action=create',
             'langs'=>'formulevoyage@formulevoyage',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
             'position'=>1000+$r,

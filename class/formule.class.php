@@ -129,9 +129,12 @@ class Formule extends CommonObject
 		'date_dep' => array('type'=>'datetime', 'label'=>'Date départ', 'enabled'=>'1', 'position'=>7, 'notnull'=>0, 'visible'=>1,),
 		'tarif' => array('type'=>'price', 'label'=>'tarif', 'enabled'=>'1', 'position'=>3, 'notnull'=>1, 'visible'=>1, 'searchall'=>1,),
 		'fk_country' => array('type'=>'integer:Ccountry:core/class/ccountry.class.php', 'label'=>'Pays', 'enabled'=>'1', 'position'=>4, 'notnull'=>1, 'visible'=>1,),
+        'entity' => array('type'=>'integer', 'label'=>'Entity', 'enabled'=>1, 'visible'=>0, 'notnull'=> 1, 'default'=>0, 'index'=>1, 'position'=>20)
+
 	);
-	public $rowid;
-	public $ref;
+
+    public $rowid;
+	public $entity;
 	public $description;
 	public $note_public;
 	public $note_private;
@@ -919,10 +922,10 @@ class Formule extends CommonObject
 			global $langs;
 			//$langs->load("formulevoyage@formulevoyage");
 			$this->labelStatus[self::STATUS_DRAFT] = $langs->transnoentitiesnoconv('Draft');
-			$this->labelStatus[self::STATUS_VALIDATED] = $langs->transnoentitiesnoconv('Enabled');
+			$this->labelStatus[self::STATUS_VALIDATED] = $langs->transnoentitiesnoconv('Validated');
 			$this->labelStatus[self::STATUS_CANCELED] = $langs->transnoentitiesnoconv('Disabled');
 			$this->labelStatusShort[self::STATUS_DRAFT] = $langs->transnoentitiesnoconv('Draft');
-			$this->labelStatusShort[self::STATUS_VALIDATED] = $langs->transnoentitiesnoconv('Enabled');
+			$this->labelStatusShort[self::STATUS_VALIDATED] = $langs->transnoentitiesnoconv('Validated');
 			$this->labelStatusShort[self::STATUS_CANCELED] = $langs->transnoentitiesnoconv('Disabled');
 		}
 
