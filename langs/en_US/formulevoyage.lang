@@ -43,6 +43,11 @@ FormulevoyageAboutPage = Formulevoyage about page
 titreMenuTop = Formules voyages
 newFormule = Nouvelle Formule
 listFormule = Liste Formule
+modetransport = Mode de transport
+lireFormuleVoyage = Lire formule de voyage
+updateFormuleVoyage = Créer et mettre à jour formule de voyage
+deleteFormuleVoyage = Supprimer Formule de voyage
+
 
 #
 # Sample page

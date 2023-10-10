@@ -210,7 +210,7 @@ class modFormulevoyage extends DolibarrModules
             // List of tables we want to see into dictonnary editor
             'tabname'=>array(MAIN_DB_PREFIX."c_mode_transport"),
             // Label of tables
-            'tablib'=>array("Mode de transport"),
+            'tablib'=>array($langs->trans('modetransport')),
             // Request to select fields
             'tabsql'=>array('SELECT f.rowid as rowid, f.code, f.label, f.active FROM '.MAIN_DB_PREFIX.'c_mode_transport as f'),
             // Sort order
@@ -293,17 +293,17 @@ class modFormulevoyage extends DolibarrModules
 		// Add here entries to declare new permissions
 		/* BEGIN MODULEBUILDER PERMISSIONS */
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 0 + 1);
-		$this->rights[$r][1] = 'Read Formule object of Formulevoyage';
+		$this->rights[$r][1] = $lang->trans('lireFormuleVoyage');
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'read';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 1 + 1);
-		$this->rights[$r][1] = 'Create/Update Formule object of Formulevoyage';
+		$this->rights[$r][1] = $lang->trans('updateFormuleVoyage');
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'write';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 2 + 1);
-		$this->rights[$r][1] = 'Delete Formule object of Formulevoyage';
+		$this->rights[$r][1] = $lang->trans('deleteFormuleVoyage');
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'delete';
 		$r++;
