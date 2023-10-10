@@ -629,7 +629,8 @@ $totalarray['nbfield'] = 0;
 
 // Fields title label
 // --------------------------------------------------------------------
-print '<tr class="liste_titre">';
+$cssKanban = (GETPOST('mode', 'aZ09') == 'kanban') ? 'titleNone': '';
+print '<tr class="liste_titre '.$cssKanban.'">';
 // Action column
 if (getDolGlobalString('MAIN_CHECKBOX_LEFT_COLUMN')) {
 	print getTitleFieldOfList($selectedfields, 0, $_SERVER["PHP_SELF"], '', '', '', '', $sortfield, $sortorder, 'center maxwidthsearch ')."\n";

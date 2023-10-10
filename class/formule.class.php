@@ -123,7 +123,7 @@ class Formule extends CommonObject
 		'tms' => array('type'=>'timestamp', 'label'=>'DateModification', 'enabled'=>'1', 'position'=>501, 'notnull'=>0, 'visible'=>-2,),
 		'fk_user_creat' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserAuthor', 'picto'=>'user', 'enabled'=>'1', 'position'=>510, 'notnull'=>1, 'visible'=>-2, 'foreignkey'=>'user.rowid', 'csslist'=>'tdoverflowmax150',),
 		'fk_user_modif' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserModif', 'picto'=>'user', 'enabled'=>'1', 'position'=>511, 'notnull'=>-1, 'visible'=>-2, 'csslist'=>'tdoverflowmax150',),
-		'status' => array('type'=>'integer', 'label'=>'Status', 'enabled'=>'1', 'position'=>2000, 'notnull'=>1, 'visible'=>2, 'index'=>1, 'validate'=>'1',),
+        'status' => array('type'=>'smallint', 'label'=>'Status', 'enabled'=>'1', 'notnull'=>1, 'position'=>16, 'visible'=>5, 'default'=>0,'index'=>1, 'arrayofkeyval'=>array('0'=>'Brouillon', '1'=>'Valid&eacute;'),),
 		'fk_mode_transport' => array('type'=>'sellist:c_mode_transport:label:rowid::active=1', 'label'=>'Type de transport', 'enabled'=>'1', 'position'=>5, 'notnull'=>0, 'visible'=>1,),
 		'date_arr' => array('type'=>'datetime', 'label'=>'Date arrivée', 'enabled'=>'1', 'position'=>6, 'notnull'=>0, 'visible'=>1,),
 		'date_dep' => array('type'=>'datetime', 'label'=>'Date départ', 'enabled'=>'1', 'position'=>7, 'notnull'=>0, 'visible'=>1,),
