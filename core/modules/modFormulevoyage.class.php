@@ -270,8 +270,8 @@ class modFormulevoyage extends DolibarrModules
 			//  0 => array(
 			//      'label' => 'MyJob label',
 			//      'jobtype' => 'method',
-			//      'class' => '/formulevoyage/class/fomule.class.php',
-			//      'objectname' => 'Fomule',
+			//      'class' => '/formulevoyage/class/Formule.class.php',
+			//      'objectname' => 'Formule',
 			//      'method' => 'doScheduledJob',
 			//      'parameters' => '',
 			//      'comment' => 'Comment',
@@ -326,19 +326,19 @@ class modFormulevoyage extends DolibarrModules
 			'langs'=>'formulevoyage@formulevoyage', // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 			'position'=>1000 + $r,
 			'enabled'=>'isModEnabled("formulevoyage")', // Define condition to show or hide menu entry. Use 'isModEnabled("formulevoyage")' if entry must be visible if module is enabled.
-			'perms'=>'1', // Use 'perms'=>'$user->hasRight("formulevoyage", "fomule", "read")' if you want your menu with a permission rules
+			'perms'=>'1', // Use 'perms'=>'$user->hasRight("formulevoyage", "Formule", "read")' if you want your menu with a permission rules
 			'target'=>'',
 			'user'=>2, // 0=Menu for internal users, 1=external users, 2=both
 		);
 		/* END MODULEBUILDER TOPMENU */
-		/* BEGIN MODULEBUILDER LEFTMENU MYOBJECT */
+		/* BEGIN MODULEBUILDER LEFTMENU FORMULE */
 
 
 		/*LEFTMENU FORMULE*/
         $this->menu[$r++]=array(
             'fk_menu'=>'fk_mainmenu=formulevoyage',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
             'type'=>'left',                          // This is a Top menu entry
-            'titre'=>'Formule voyage',
+            'titre'=>$langs->trans('titreMenuTop'),
             'prefix' => img_picto('', $this->picto, 'class="paddingright pictofixedwidth valignmiddle"'),
             'mainmenu'=>'formulevoyage',
             'leftmenu'=>'formulevoyage',
@@ -354,7 +354,7 @@ class modFormulevoyage extends DolibarrModules
         $this->menu[$r++]=array(
             'fk_menu'=>'fk_mainmenu=formulevoyage,fk_leftmenu=formulevoyage',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
             'type'=>'left',			                // This is a Left menu entry
-            'titre'=>'Nouvelle Formule',
+            'titre'=>$langs->trans('newFormule'),
             'mainmenu'=>'formulevoyage',
             'leftmenu'=>'formulevoyage_new',
             'url'=>'/formulevoyage/formule_card.php?action=create',
@@ -369,7 +369,7 @@ class modFormulevoyage extends DolibarrModules
         $this->menu[$r++]=array(
             'fk_menu'=>'fk_mainmenu=formulevoyage,fk_leftmenu=formulevoyage',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
             'type'=>'left',			                // This is a Left menu entry
-            'titre'=>'Liste Formule',
+            'titre'=>$langs->trans('listFormule'),
             'mainmenu'=>'formulevoyage',
             'leftmenu'=>'formulevoyage_list',
             'url'=>'/formulevoyage/formule_list.php',
@@ -399,7 +399,7 @@ class modFormulevoyage extends DolibarrModules
         $this->menu[$r++]=array(
             'fk_menu'=>'fk_mainmenu=formulevoyage,fk_leftmenu=formulevoyage_list',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
             'type'=>'left',			                // This is a Left menu entry
-            'titre'=>'Validé',
+            'titre'=>'validated',
             'mainmenu'=>'formulevoyage_list',
             'leftmenu'=>'formule_list_validate',
             'url'=>'/formulevoyage/formulevoyage_list.php?leftmenu=formulevoyage&search_status=1',
@@ -412,65 +412,65 @@ class modFormulevoyage extends DolibarrModules
         );
 
 		/*END LEFTMENU FORMULE*/
-		/* END MODULEBUILDER LEFTMENU MYOBJECT */
+		/* END MODULEBUILDER LEFTMENU FORMULE */
 		// Exports profiles provided by this module
 		$r = 1;
-		/* BEGIN MODULEBUILDER EXPORT MYOBJECT */
+		/* BEGIN MODULEBUILDER EXPORT FORMULE */
 		/*
 		$langs->load("formulevoyage@formulevoyage");
 		$this->export_code[$r]=$this->rights_class.'_'.$r;
-		$this->export_label[$r]='FomuleLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
-		$this->export_icon[$r]='fomule@formulevoyage';
+		$this->export_label[$r]='FormuleLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
+		$this->export_icon[$r]='Formule@formulevoyage';
 		// Define $this->export_fields_array, $this->export_TypeFields_array and $this->export_entities_array
-		$keyforclass = 'Fomule'; $keyforclassfile='/formulevoyage/class/fomule.class.php'; $keyforelement='fomule@formulevoyage';
+		$keyforclass = 'Formule'; $keyforclassfile='/formulevoyage/class/Formule.class.php'; $keyforelement='Formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/commonfieldsinexport.inc.php';
 		//$this->export_fields_array[$r]['t.fieldtoadd']='FieldToAdd'; $this->export_TypeFields_array[$r]['t.fieldtoadd']='Text';
 		//unset($this->export_fields_array[$r]['t.fieldtoremove']);
-		//$keyforclass = 'FomuleLine'; $keyforclassfile='/formulevoyage/class/fomule.class.php'; $keyforelement='fomuleline@formulevoyage'; $keyforalias='tl';
+		//$keyforclass = 'FormuleLine'; $keyforclassfile='/formulevoyage/class/Formule.class.php'; $keyforelement='Formuleline@formulevoyage'; $keyforalias='tl';
 		//include DOL_DOCUMENT_ROOT.'/core/commonfieldsinexport.inc.php';
-		$keyforselect='fomule'; $keyforaliasextra='extra'; $keyforelement='fomule@formulevoyage';
+		$keyforselect='Formule'; $keyforaliasextra='extra'; $keyforelement='Formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/extrafieldsinexport.inc.php';
-		//$keyforselect='fomuleline'; $keyforaliasextra='extraline'; $keyforelement='fomuleline@formulevoyage';
+		//$keyforselect='Formuleline'; $keyforaliasextra='extraline'; $keyforelement='Formuleline@formulevoyage';
 		//include DOL_DOCUMENT_ROOT.'/core/extrafieldsinexport.inc.php';
-		//$this->export_dependencies_array[$r] = array('fomuleline'=>array('tl.rowid','tl.ref')); // To force to activate one or several fields if we select some fields that need same (like to select a unique key if we ask a field of a child to avoid the DISTINCT to discard them, or for computed field than need several other fields)
+		//$this->export_dependencies_array[$r] = array('Formuleline'=>array('tl.rowid','tl.ref')); // To force to activate one or several fields if we select some fields that need same (like to select a unique key if we ask a field of a child to avoid the DISTINCT to discard them, or for computed field than need several other fields)
 		//$this->export_special_array[$r] = array('t.field'=>'...');
 		//$this->export_examplevalues_array[$r] = array('t.field'=>'Example');
 		//$this->export_help_array[$r] = array('t.field'=>'FieldDescHelp');
 		$this->export_sql_start[$r]='SELECT DISTINCT ';
-		$this->export_sql_end[$r]  =' FROM '.MAIN_DB_PREFIX.'fomule as t';
-		//$this->export_sql_end[$r]  =' LEFT JOIN '.MAIN_DB_PREFIX.'fomule_line as tl ON tl.fk_fomule = t.rowid';
+		$this->export_sql_end[$r]  =' FROM '.MAIN_DB_PREFIX.'Formule as t';
+		//$this->export_sql_end[$r]  =' LEFT JOIN '.MAIN_DB_PREFIX.'Formule_line as tl ON tl.fk_Formule = t.rowid';
 		$this->export_sql_end[$r] .=' WHERE 1 = 1';
-		$this->export_sql_end[$r] .=' AND t.entity IN ('.getEntity('fomule').')';
+		$this->export_sql_end[$r] .=' AND t.entity IN ('.getEntity('Formule').')';
 		$r++; */
-		/* END MODULEBUILDER EXPORT MYOBJECT */
+		/* END MODULEBUILDER EXPORT FORMULE */
 
 		// Imports profiles provided by this module
 		$r = 1;
-		/* BEGIN MODULEBUILDER IMPORT MYOBJECT */
+		/* BEGIN MODULEBUILDER IMPORT FORMULE */
 		/*
 		$langs->load("formulevoyage@formulevoyage");
 		$this->import_code[$r]=$this->rights_class.'_'.$r;
-		$this->import_label[$r]='FomuleLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
-		$this->import_icon[$r]='fomule@formulevoyage';
-		$this->import_tables_array[$r] = array('t' => MAIN_DB_PREFIX.'formulevoyage_fomule', 'extra' => MAIN_DB_PREFIX.'formulevoyage_fomule_extrafields');
+		$this->import_label[$r]='FormuleLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
+		$this->import_icon[$r]='Formule@formulevoyage';
+		$this->import_tables_array[$r] = array('t' => MAIN_DB_PREFIX.'formulevoyage_Formule', 'extra' => MAIN_DB_PREFIX.'formulevoyage_Formule_extrafields');
 		$this->import_tables_creator_array[$r] = array('t' => 'fk_user_author'); // Fields to store import user id
 		$import_sample = array();
-		$keyforclass = 'Fomule'; $keyforclassfile='/formulevoyage/class/fomule.class.php'; $keyforelement='fomule@formulevoyage';
+		$keyforclass = 'Formule'; $keyforclassfile='/formulevoyage/class/Formule.class.php'; $keyforelement='Formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/commonfieldsinimport.inc.php';
 		$import_extrafield_sample = array();
-		$keyforselect='fomule'; $keyforaliasextra='extra'; $keyforelement='fomule@formulevoyage';
+		$keyforselect='Formule'; $keyforaliasextra='extra'; $keyforelement='Formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/extrafieldsinimport.inc.php';
-		$this->import_fieldshidden_array[$r] = array('extra.fk_object' => 'lastrowid-'.MAIN_DB_PREFIX.'formulevoyage_fomule');
+		$this->import_fieldshidden_array[$r] = array('extra.fk_object' => 'lastrowid-'.MAIN_DB_PREFIX.'formulevoyage_Formule');
 		$this->import_regex_array[$r] = array();
 		$this->import_examplevalues_array[$r] = array_merge($import_sample, $import_extrafield_sample);
 		$this->import_updatekeys_array[$r] = array('t.ref' => 'Ref');
 		$this->import_convertvalue_array[$r] = array(
 			't.ref' => array(
 				'rule'=>'getrefifauto',
-				'class'=>(!getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON') ? 'mod_fomule_standard' : getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON')),
-				'path'=>"/core/modules/commande/".(!getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON') ? 'mod_fomule_standard' : getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADDON')).'.php'
-				'classobject'=>'Fomule',
-				'pathobject'=>'/formulevoyage/class/fomule.class.php',
+				'class'=>(!getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON') ? 'mod_Formule_standard' : getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')),
+				'path'=>"/core/modules/commande/".(!getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON') ? 'mod_Formule_standard' : getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')).'.php'
+				'classobject'=>'Formule',
+				'pathobject'=>'/formulevoyage/class/Formule.class.php',
 			),
 			't.fk_soc' => array('rule' => 'fetchidfromref', 'file' => '/societe/class/societe.class.php', 'class' => 'Societe', 'method' => 'fetch', 'element' => 'ThirdParty'),
 			't.fk_user_valid' => array('rule' => 'fetchidfromref', 'file' => '/user/class/user.class.php', 'class' => 'User', 'method' => 'fetch', 'element' => 'user'),
@@ -478,7 +478,7 @@ class modFormulevoyage extends DolibarrModules
 		);
 		$this->import_run_sql_after_array[$r] = array();
 		$r++; */
-		/* END MODULEBUILDER IMPORT MYOBJECT */
+		/* END MODULEBUILDER IMPORT FORMULE */
 	}
 
 	/**
@@ -516,16 +516,16 @@ class modFormulevoyage extends DolibarrModules
 		// Document templates
 		$moduledir = dol_sanitizeFileName('formulevoyage');
 		$myTmpObjects = array();
-		$myTmpObjects['Fomule'] = array('includerefgeneration'=>0, 'includedocgeneration'=>0);
+		$myTmpObjects['Formule'] = array('includerefgeneration'=>0, 'includedocgeneration'=>0);
 
 		foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
-			if ($myTmpObjectKey == 'Fomule') {
+			if ($myTmpObjectKey == 'Formule') {
 				continue;
 			}
 			if ($myTmpObjectArray['includerefgeneration']) {
-				$src = DOL_DOCUMENT_ROOT.'/install/doctemplates/'.$moduledir.'/template_fomules.odt';
+				$src = DOL_DOCUMENT_ROOT.'/install/doctemplates/'.$moduledir.'/template_formules.odt';
 				$dirodt = DOL_DATA_ROOT.'/doctemplates/'.$moduledir;
-				$dest = $dirodt.'/template_fomules.odt';
+				$dest = $dirodt.'/template_formules.odt';
 
 				if (file_exists($src) && !file_exists($dest)) {
 					require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';

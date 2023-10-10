@@ -558,7 +558,7 @@ class Formule extends CommonObject
 
 			if (!$error && !$notrigger) {
 				// Call trigger
-				$result = $this->call_trigger('MYOBJECT_VALIDATE', $user);
+				$result = $this->call_trigger('FORMULE_VALIDATE', $user);
 				if ($result < 0) {
 					$error++;
 				}
@@ -640,7 +640,7 @@ class Formule extends CommonObject
 		 return -1;
 		 }*/
 
-		return $this->setStatusCommon($user, self::STATUS_DRAFT, $notrigger, 'MYOBJECT_UNVALIDATE');
+		return $this->setStatusCommon($user, self::STATUS_DRAFT, $notrigger, 'FORMULE_UNVALIDATE');
 	}
 
 	/**
@@ -689,7 +689,7 @@ class Formule extends CommonObject
 		 }*/
 
 
-		return $this->setStatusCommon($user, self::STATUS_VALIDATED, $notrigger, 'MYOBJECT_REOPEN');
+		return $this->setStatusCommon($user, self::STATUS_VALIDATED, $notrigger, 'FORMULE_REOPEN');
 	}
 
 	/**
@@ -1085,8 +1085,8 @@ class Formule extends CommonObject
 
 			if (!empty($this->model_pdf)) {
 				$modele = $this->model_pdf;
-			} elseif (getDolGlobalString('MYOBJECT_ADDON_PDF')) {
-				$modele = getDolGlobalString('MYOBJECT_ADDON_PDF');
+			} elseif (getDolGlobalString('FORMULE_ADDON_PDF')) {
+				$modele = getDolGlobalString('FORMULE_ADDON_PDF');
 			}
 		}
 

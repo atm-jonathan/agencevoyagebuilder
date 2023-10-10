@@ -76,8 +76,8 @@ if (!$res) {
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formcompany.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formprojet.class.php';
-dol_include_once('/formulevoyage/class/formule.class.php');
-dol_include_once('/formulevoyage/lib/formulevoyage_formule.lib.php');
+require __DIR__ .'/class/formule.class.php';
+require __DIR__ .'/lib/formulevoyage_formule.lib.php';
 
 // Load translation files required by the page
 $langs->loadLangs(array("formulevoyage@formulevoyage", "other"));
@@ -189,7 +189,7 @@ if (empty($reshook)) {
         }
     }
 
-	$triggermodname = 'FORMULEVOYAGE_MYOBJECT_MODIFY'; // Name of trigger action code to execute when we modify record
+	$triggermodname = 'FORMULEVOYAGE_FORMULE_MODIFY'; // Name of trigger action code to execute when we modify record
 
 	// Actions cancel, add, update, update_extras, confirm_validate, confirm_delete, confirm_deleteline, confirm_clone, confirm_close, confirm_setdraft, confirm_reopen
 	include DOL_DOCUMENT_ROOT.'/core/actions_addupdatedelete.inc.php';
@@ -214,8 +214,8 @@ if (empty($reshook)) {
 	}
 
 	// Actions to send emails
-	$triggersendname = 'FORMULEVOYAGE_MYOBJECT_SENTBYMAIL';
-	$autocopy = 'MAIN_MAIL_AUTOCOPY_MYOBJECT_TO';
+	$triggersendname = 'FORMULEVOYAGE_FORMULE_SENTBYMAIL';
+	$autocopy = 'MAIN_MAIL_AUTOCOPY_FORMULE_TO';
 	$trackid = 'formule'.$object->id;
 	include DOL_DOCUMENT_ROOT.'/core/actions_sendmails.inc.php';
 }
@@ -344,10 +344,6 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 	// Confirmation to delete
 	if ($action == 'delete') {
 		$formconfirm = $form->formconfirm($_SERVER["PHP_SELF"].'?id='.$object->id, $langs->trans('DeleteFormule'), $langs->trans('ConfirmDeleteObject'), 'confirm_delete', '', 0, 1);
-	}
-	// Confirmation to delete line
-	if ($action == 'deleteline') {
-		$formconfirm = $form->formconfirm($_SERVER["PHP_SELF"].'?id='.$object->id.'&lineid='.$lineid, $langs->trans('DeleteLine'), $langs->trans('ConfirmDeleteLine'), 'confirm_deleteline', '', 0, 1);
 	}
 
 	// Clone confirmation
