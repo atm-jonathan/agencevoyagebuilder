@@ -239,10 +239,12 @@ class Formule extends CommonObject
 	 */
 	public function create(User $user, $notrigger = false)
 	{
+        if (strlen(GETPOST('description', 'aZ09')) < 5 ){
+            setEventMessage('Description de la formule trop courte, 5 caractère minimum', 'errors');
+            return 0;
+        }
 		$resultcreate = $this->createCommon($user, $notrigger);
-
 		//$resultvalidate = $this->validate($user, $notrigger);
-
 		return $resultcreate;
 	}
 
