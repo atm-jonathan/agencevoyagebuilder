@@ -68,7 +68,7 @@ class mod_formule_advanced extends ModeleNumRefFormule
 		$texte .= '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
 		$texte .= '<input type="hidden" name="token" value="'.newToken().'">';
 		$texte .= '<input type="hidden" name="action" value="updateMask">';
-		$texte .= '<input type="hidden" name="maskconst" value="FORMULEVOYAGE_MYOBJECT_ADVANCED_MASK">';
+		$texte .= '<input type="hidden" name="maskconst" value="FORMULEVOYAGE_FORMULE_ADVANCED_MASK">';
 		$texte .= '<table class="nobordernopadding centpercent">';
 
 		$tooltip = $langs->trans("GenericMaskCodes", $langs->transnoentities("Formule"), $langs->transnoentities("Formule"));
@@ -79,7 +79,7 @@ class mod_formule_advanced extends ModeleNumRefFormule
 
 		// Parametrage du prefix
 		$texte .= '<tr><td>'.$langs->trans("Mask").':</td>';
-		$texte .= '<td class="right">'.$form->textwithpicto('<input type="text" class="flat minwidth175" name="maskvalue" value="'.getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADVANCED_MASK').'">', $tooltip, 1, 1).'</td>';
+		$texte .= '<td class="right">'.$form->textwithpicto('<input type="text" class="flat minwidth175" name="maskvalue" value="'.getDolGlobalString('FORMULEVOYAGE_FORMULE_ADVANCED_MASK').'">', $tooltip, 1, 1).'</td>';
 		$texte .= '<td class="left" rowspan="2">&nbsp; <input type="submit" class="button button-edit" value="'.$langs->trans("Modify").'" name="Button"></td>';
 		$texte .= '</tr>';
 
@@ -130,7 +130,7 @@ class mod_formule_advanced extends ModeleNumRefFormule
 		require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
 		// We get cursor rule
-		$mask = getDolGlobalString('FORMULEVOYAGE_MYOBJECT_ADVANCED_MASK');
+		$mask = getDolGlobalString('FORMULEVOYAGE_FORMULE_ADVANCED_MASK');
 
 		if (!$mask) {
 			$this->error = 'NotConfigured';

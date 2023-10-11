@@ -62,13 +62,11 @@ class Formule extends CommonObject
 	/**
 	 * @var string String with name of icon for formule. Must be a 'fa-xxx' fontawesome code (or 'fa-xxx_fa_color_size') or 'formule@formulevoyage' if picto is file 'img/object_formule.png'.
 	 */
-	public $picto = 'fa-file';
+	public $picto = 'fa-plane';
 
 
 	const STATUS_DRAFT = 0;
 	const STATUS_VALIDATED = 1;
-	const STATUS_CANCELED = 9;
-
 
 	/**
 	 *  'type' field format:
@@ -123,14 +121,13 @@ class Formule extends CommonObject
 		'tms' => array('type'=>'timestamp', 'label'=>'DateModification', 'enabled'=>'1', 'position'=>501, 'notnull'=>0, 'visible'=>-2,),
 		'fk_user_creat' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserAuthor', 'picto'=>'user', 'enabled'=>'1', 'position'=>510, 'notnull'=>1, 'visible'=>-2, 'foreignkey'=>'user.rowid', 'csslist'=>'tdoverflowmax150',),
 		'fk_user_modif' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserModif', 'picto'=>'user', 'enabled'=>'1', 'position'=>511, 'notnull'=>-1, 'visible'=>-2, 'csslist'=>'tdoverflowmax150',),
-        'status' => array('type'=>'smallint', 'label'=>'Status', 'enabled'=>'1', 'notnull'=>1, 'position'=>16, 'visible'=>5, 'default'=>0,'index'=>1, 'arrayofkeyval'=>array('0'=>'Brouillon', '1'=>'Valid&eacute;'),),
+        'status' => array('type'=>'smallint', 'label'=>'Status', 'enabled'=>'1', 'notnull'=>1, 'position'=>16, 'visible'=>5, 'default'=>0,'index'=>1, 'arrayofkeyval'=>array('0'=>'Draft', '1'=>'Validated'),),
 		'fk_mode_transport' => array('type'=>'sellist:c_mode_transport:label:rowid::active=1', 'label'=>'Type de transport', 'enabled'=>'1', 'position'=>5, 'notnull'=>0, 'visible'=>1,),
 		'date_arr' => array('type'=>'datetime', 'label'=>'Date arrivée', 'enabled'=>'1', 'position'=>6, 'notnull'=>0, 'visible'=>1,),
 		'date_dep' => array('type'=>'datetime', 'label'=>'Date départ', 'enabled'=>'1', 'position'=>7, 'notnull'=>0, 'visible'=>1,),
 		'tarif' => array('type'=>'price', 'label'=>'tarif', 'enabled'=>'1', 'position'=>3, 'notnull'=>1, 'visible'=>1, 'searchall'=>1,),
 		'fk_country' => array('type'=>'integer:Ccountry:core/class/ccountry.class.php', 'label'=>'Pays', 'enabled'=>'1', 'position'=>4, 'notnull'=>1, 'visible'=>1,),
         'entity' => array('type'=>'integer', 'label'=>'Entity', 'enabled'=>1, 'visible'=>0, 'notnull'=> 1, 'default'=>0, 'index'=>1, 'position'=>20)
-
 	);
 
     public $rowid;
@@ -246,6 +243,7 @@ class Formule extends CommonObject
             return 0;
         }
 		//$resultvalidate = $this->validate($user, $notrigger);
+
 		return $resultcreate;
 	}
 
@@ -569,7 +567,7 @@ class Formule extends CommonObject
 
 			if (!$error && !$notrigger) {
 				// Call trigger
-				$result = $this->call_trigger('MYOBJECT_VALIDATE', $user);
+				$result = $this->call_trigger('FORMULE_VALIDATE', $user);
 				if ($result < 0) {
 					$error++;
 				}
@@ -651,7 +649,7 @@ class Formule extends CommonObject
 		 return -1;
 		 }*/
 
-		return $this->setStatusCommon($user, self::STATUS_DRAFT, $notrigger, 'MYOBJECT_UNVALIDATE');
+		return $this->setStatusCommon($user, self::STATUS_DRAFT, $notrigger, 'FORMULE_UNVALIDATE');
 	}
 
 	/**
@@ -675,7 +673,7 @@ class Formule extends CommonObject
 		 return -1;
 		 }*/
 
-		return $this->setStatusCommon($user, self::STATUS_CANCELED, $notrigger, 'MYOBJECT_CANCEL');
+		return 0;
 	}
 
 	/**
@@ -700,7 +698,7 @@ class Formule extends CommonObject
 		 }*/
 
 
-		return $this->setStatusCommon($user, self::STATUS_VALIDATED, $notrigger, 'MYOBJECT_REOPEN');
+		return $this->setStatusCommon($user, self::STATUS_VALIDATED, $notrigger, 'FORMULE_REOPEN');
 	}
 
 	/**
@@ -931,17 +929,12 @@ class Formule extends CommonObject
 			//$langs->load("formulevoyage@formulevoyage");
 			$this->labelStatus[self::STATUS_DRAFT] = $langs->transnoentitiesnoconv('Draft');
 			$this->labelStatus[self::STATUS_VALIDATED] = $langs->transnoentitiesnoconv('Validated');
-			$this->labelStatus[self::STATUS_CANCELED] = $langs->transnoentitiesnoconv('Disabled');
 			$this->labelStatusShort[self::STATUS_DRAFT] = $langs->transnoentitiesnoconv('Draft');
 			$this->labelStatusShort[self::STATUS_VALIDATED] = $langs->transnoentitiesnoconv('Validated');
-			$this->labelStatusShort[self::STATUS_CANCELED] = $langs->transnoentitiesnoconv('Disabled');
 		}
 
 		$statusType = 'status'.$status;
 		//if ($status == self::STATUS_VALIDATED) $statusType = 'status1';
-		if ($status == self::STATUS_CANCELED) {
-			$statusType = 'status6';
-		}
 
 		return dolGetStatus($this->labelStatus[$status], $this->labelStatusShort[$status], '', $statusType, $mode);
 	}
@@ -1101,8 +1094,8 @@ class Formule extends CommonObject
 
 			if (!empty($this->model_pdf)) {
 				$modele = $this->model_pdf;
-			} elseif (getDolGlobalString('MYOBJECT_ADDON_PDF')) {
-				$modele = getDolGlobalString('MYOBJECT_ADDON_PDF');
+			} elseif (getDolGlobalString('FORMULE_ADDON_PDF')) {
+				$modele = getDolGlobalString('FORMULE_ADDON_PDF');
 			}
 		}
 
@@ -1160,30 +1153,3 @@ class Formule extends CommonObject
     }
 }
 
-
-
-require_once DOL_DOCUMENT_ROOT.'/core/class/commonobjectline.class.php';
-
-/**
- * Class FormuleLine. You can also remove this and generate a CRUD class for lines objects.
- */
-class FormuleLine extends CommonObjectLine
-{
-	// To complete with content of an object FormuleLine
-	// We should have a field rowid, fk_formule and position
-
-	/**
-	 * @var int  Does object support extrafields ? 0=No, 1=Yes
-	 */
-	public $isextrafieldmanaged = 0;
-
-	/**
-	 * Constructor
-	 *
-	 * @param DoliDb $db Database handler
-	 */
-	public function __construct(DoliDB $db)
-	{
-		$this->db = $db;
-	}
-}

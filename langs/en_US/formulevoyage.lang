@@ -25,9 +25,9 @@ ModuleFormulevoyageDesc = Formulevoyage description
 #
 # Admin page
 #
-FormulevoyageSetup = Formulevoyage setup
-Settings = Settings
-FormulevoyageSetupPage = Formulevoyage setup page
+FormulevoyageSetup = Formule voyage setup
+Settings = Paramètres
+FormulevoyageSetupPage = Formule voyage Page de paramètres
 FORMULEVOYAGE_MYPARAM1 = My param 1
 FORMULEVOYAGE_MYPARAM1Tooltip = My param 1 tooltip
 FORMULEVOYAGE_MYPARAM2=My param 2
@@ -40,6 +40,14 @@ FORMULEVOYAGE_MYPARAM2Tooltip=My param 2 tooltip
 About = About
 FormulevoyageAbout = About Formulevoyage
 FormulevoyageAboutPage = Formulevoyage about page
+titreMenuTop = Formules voyages
+newFormule = Nouvelle Formule
+listFormule = Liste Formule
+modetransport = Mode de transport
+lireFormuleVoyage = Lire formule de voyage
+updateFormuleVoyage = Créer et mettre à jour formule de voyage
+deleteFormuleVoyage = Supprimer Formule de voyage
+
 
 #
 # Sample page
