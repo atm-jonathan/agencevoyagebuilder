@@ -72,7 +72,7 @@ class modFormulevoyage extends DolibarrModules
 		$this->editor_url = '';
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.0';
+		$this->version = '1.0.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
@@ -293,17 +293,17 @@ class modFormulevoyage extends DolibarrModules
 		// Add here entries to declare new permissions
 		/* BEGIN MODULEBUILDER PERMISSIONS */
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 0 + 1);
-		$this->rights[$r][1] = $lang->trans('lireFormuleVoyage');
+		$this->rights[$r][1] = 'lireFormuleVoyage';
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'read';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 1 + 1);
-		$this->rights[$r][1] = $lang->trans('updateFormuleVoyage');
+		$this->rights[$r][1] = 'updateFormuleVoyage';
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'write';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 2 + 1);
-		$this->rights[$r][1] = $lang->trans('deleteFormuleVoyage');
+		$this->rights[$r][1] = 'deleteFormuleVoyage';
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'delete';
 		$r++;
@@ -338,7 +338,7 @@ class modFormulevoyage extends DolibarrModules
         $this->menu[$r++]=array(
             'fk_menu'=>'fk_mainmenu=formulevoyage',      // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
             'type'=>'left',                          // This is a Top menu entry
-            'titre'=>$langs->trans('titreMenuTop'),
+            'titre'=>'titreMenuTop',
             'prefix' => img_picto('', $this->picto, 'class="paddingright pictofixedwidth valignmiddle"'),
             'mainmenu'=>'formulevoyage',
             'leftmenu'=>'formulevoyage',
@@ -354,7 +354,7 @@ class modFormulevoyage extends DolibarrModules
         $this->menu[$r++]=array(
             'fk_menu'=>'fk_mainmenu=formulevoyage,fk_leftmenu=formulevoyage',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
             'type'=>'left',			                // This is a Left menu entry
-            'titre'=>$langs->trans('newFormule'),
+            'titre'=>'newFormule',
             'mainmenu'=>'formulevoyage',
             'leftmenu'=>'formulevoyage_new',
             'url'=>'/formulevoyage/formule_card.php?action=create',
@@ -369,7 +369,7 @@ class modFormulevoyage extends DolibarrModules
         $this->menu[$r++]=array(
             'fk_menu'=>'fk_mainmenu=formulevoyage,fk_leftmenu=formulevoyage',	    // '' if this is a top menu. For left menu, use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
             'type'=>'left',			                // This is a Left menu entry
-            'titre'=>$langs->trans('listFormule'),
+            'titre'=>'listFormule',
             'mainmenu'=>'formulevoyage',
             'leftmenu'=>'formulevoyage_list',
             'url'=>'/formulevoyage/formule_list.php',
