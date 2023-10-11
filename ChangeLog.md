@@ -2,6 +2,5 @@
 
 ## UNRELEASED
 
-## Version 1.0.0
-- NEW : nouveau Module avec le Builder équivalent au module Voyage - *1.0.0* - **10/10/2023**
-- FIX: retour des PR - *1.0.0* - **10/10/2023**
+## Version 1.0.1
+- FIX: conflits- *1.0.1* - **10/10/2023**
