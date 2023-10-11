@@ -1,5 +1,7 @@
-# CHANGELOG FORMULEVOYAGE FOR [DOLIBARR ERP CRM](https://www.dolibarr.org)
+# ChangeLog for formulevoyage
 
-## 1.0
+## UNRELEASED
 
-Initial version
+## Version 1.0.0
+- NEW : nouveau Module avec le Builder équivalent au module Voyage - *1.0.0* - **10/10/2023**
+- FIX: retour des PR - *1.0.0* - **10/10/2023**

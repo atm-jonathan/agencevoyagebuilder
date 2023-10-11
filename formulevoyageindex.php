@@ -78,10 +78,10 @@ if (isset($user->socid) && $user->socid > 0) {
 //if (!isModEnabled('formulevoyage')) {
 //	accessforbidden('Module not enabled');
 //}
-//if (! $user->hasRight('formulevoyage', 'myobject', 'read')) {
+//if (! $user->hasRight('formulevoyage', 'formule', 'read')) {
 //	accessforbidden();
 //}
-//restrictedArea($user, 'formulevoyage', 0, 'formulevoyage_myobject', 'myobject', '', 'rowid');
+//restrictedArea($user, 'formulevoyage', 0, 'formulevoyage_formule', 'formule', '', 'rowid');
 //if (empty($user->admin)) {
 //	accessforbidden('Must be admin');
 //}
@@ -108,7 +108,7 @@ print load_fiche_titre($langs->trans("FormulevoyageArea"), '', 'formulevoyage.pn
 print '<div class="fichecenter"><div class="fichethirdleft">';
 
 
-/* BEGIN MODULEBUILDER DRAFT MYOBJECT
+/* BEGIN MODULEBUILDER DRAFT FORMULE
 // Draft MyObject
 if (isModEnabled('formulevoyage') && $user->rights->formulevoyage->read)
 {
@@ -145,14 +145,14 @@ if (isModEnabled('formulevoyage') && $user->rights->formulevoyage->read)
 				$obj = $db->fetch_object($resql);
 				print '<tr class="oddeven"><td class="nowrap">';
 
-				$myobjectstatic->id=$obj->rowid;
-				$myobjectstatic->ref=$obj->ref;
-				$myobjectstatic->ref_client=$obj->ref_client;
-				$myobjectstatic->total_ht = $obj->total_ht;
-				$myobjectstatic->total_tva = $obj->total_tva;
-				$myobjectstatic->total_ttc = $obj->total_ttc;
+				$formulestatic->id=$obj->rowid;
+				$formulestatic->ref=$obj->ref;
+				$formulestatic->ref_client=$obj->ref_client;
+				$formulestatic->total_ht = $obj->total_ht;
+				$formulestatic->total_tva = $obj->total_tva;
+				$formulestatic->total_ttc = $obj->total_ttc;
 
-				print $myobjectstatic->getNomUrl(1);
+				print $formulestatic->getNomUrl(1);
 				print '</td>';
 				print '<td class="nowrap">';
 				print '</td>';
@@ -180,7 +180,7 @@ if (isModEnabled('formulevoyage') && $user->rights->formulevoyage->read)
 		dol_print_error($db);
 	}
 }
-END MODULEBUILDER DRAFT MYOBJECT */
+END MODULEBUILDER DRAFT FORMULE */
 
 
 print '</div><div class="fichetwothirdright">';
@@ -189,14 +189,14 @@ print '</div><div class="fichetwothirdright">';
 $NBMAX = getDolGlobalInt('MAIN_SIZE_SHORTLIST_LIMIT');
 $max = getDolGlobalInt('MAIN_SIZE_SHORTLIST_LIMIT');
 
-/* BEGIN MODULEBUILDER LASTMODIFIED MYOBJECT
-// Last modified myobject
+/* BEGIN MODULEBUILDER LASTMODIFIED FORMULE
+// Last modified formule
 if (isModEnabled('formulevoyage') && $user->rights->formulevoyage->read)
 {
 	$sql = "SELECT s.rowid, s.ref, s.label, s.date_creation, s.tms";
-	$sql.= " FROM ".MAIN_DB_PREFIX."formulevoyage_myobject as s";
+	$sql.= " FROM ".MAIN_DB_PREFIX."formulevoyage_formule as s";
 	//if (! $user->rights->societe->client->voir && ! $socid) $sql.= ", ".MAIN_DB_PREFIX."societe_commerciaux as sc";
-	$sql.= " WHERE s.entity IN (".getEntity($myobjectstatic->element).")";
+	$sql.= " WHERE s.entity IN (".getEntity($formulestatic->element).")";
 	//if (! $user->rights->societe->client->voir && ! $socid) $sql.= " AND s.rowid = sc.fk_soc AND sc.fk_user = ".((int) $user->id);
 	//if ($socid)	$sql.= " AND s.rowid = $socid";
 	$sql .= " ORDER BY s.tms DESC";
@@ -221,13 +221,13 @@ if (isModEnabled('formulevoyage') && $user->rights->formulevoyage->read)
 			{
 				$objp = $db->fetch_object($resql);
 
-				$myobjectstatic->id=$objp->rowid;
-				$myobjectstatic->ref=$objp->ref;
-				$myobjectstatic->label=$objp->label;
-				$myobjectstatic->status = $objp->status;
+				$formulestatic->id=$objp->rowid;
+				$formulestatic->ref=$objp->ref;
+				$formulestatic->label=$objp->label;
+				$formulestatic->status = $objp->status;
 
 				print '<tr class="oddeven">';
-				print '<td class="nowrap">'.$myobjectstatic->getNomUrl(1).'</td>';
+				print '<td class="nowrap">'.$formulestatic->getNomUrl(1).'</td>';
 				print '<td class="right nowrap">';
 				print "</td>";
 				print '<td class="right nowrap">'.dol_print_date($db->jdate($objp->tms), 'day')."</td>";

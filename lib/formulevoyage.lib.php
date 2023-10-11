@@ -32,7 +32,7 @@ function formulevoyageAdminPrepareHead()
 
 	// global $db;
 	// $extrafields = new ExtraFields($db);
-	// $extrafields->fetch_name_optionals_label('myobject');
+	// $extrafields->fetch_name_optionals_label('formule');
 
 	$langs->load("formulevoyage@formulevoyage");
 
@@ -45,13 +45,13 @@ function formulevoyageAdminPrepareHead()
 	$h++;
 
 	/*
-	$head[$h][0] = dol_buildpath("/formulevoyage/admin/myobject_extrafields.php", 1);
+	$head[$h][0] = dol_buildpath("/formulevoyage/admin/formule_extrafields.php", 1);
 	$head[$h][1] = $langs->trans("ExtraFields");
-	$nbExtrafields = is_countable($extrafields->attributes['myobject']['label']) ? count($extrafields->attributes['myobject']['label']) : 0;
+	$nbExtrafields = is_countable($extrafields->attributes['formule']['label']) ? count($extrafields->attributes['formule']['label']) : 0;
 	if ($nbExtrafields > 0) {
 		$head[$h][1] .= ' <span class="badge">' . $nbExtrafields . '</span>';
 	}
-	$head[$h][2] = 'myobject_extrafields';
+	$head[$h][2] = 'formule_extrafields';
 	$h++;
 	*/
 
