@@ -293,17 +293,17 @@ class modFormulevoyage extends DolibarrModules
 		// Add here entries to declare new permissions
 		/* BEGIN MODULEBUILDER PERMISSIONS */
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 0 + 1);
-		$this->rights[$r][1] = 'Read Formule object of Formulevoyage';
+		$this->rights[$r][1] = 'Readformulevoyage';
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'read';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 1 + 1);
-		$this->rights[$r][1] = 'Create/Update Formule object of Formulevoyage';
+		$this->rights[$r][1] = 'CreateUpdateformulevoyage';
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'write';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf('%02d', (0 * 10) + 2 + 1);
-		$this->rights[$r][1] = 'Delete Formule object of Formulevoyage';
+		$this->rights[$r][1] = 'Deleteformulevoyage';
 		$this->rights[$r][4] = 'formule';
 		$this->rights[$r][5] = 'delete';
 		$r++;
@@ -326,7 +326,7 @@ class modFormulevoyage extends DolibarrModules
 			'langs'=>'formulevoyage@formulevoyage', // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 			'position'=>1000 + $r,
 			'enabled'=>'isModEnabled("formulevoyage")', // Define condition to show or hide menu entry. Use 'isModEnabled("formulevoyage")' if entry must be visible if module is enabled.
-			'perms'=>'1', // Use 'perms'=>'$user->hasRight("formulevoyage", "fomule", "read")' if you want your menu with a permission rules
+			'perms'=> '$user->rights->formulevoyage->formule->read', // Use 'perms'=>'$user->hasRight("formulevoyage", "fomule", "read")' if you want your menu with a permission rules
 			'target'=>'',
 			'user'=>2, // 0=Menu for internal users, 1=external users, 2=both
 		);
@@ -361,7 +361,7 @@ class modFormulevoyage extends DolibarrModules
             'langs'=>'formulevoyage@formulevoyage',	        // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
             'position'=>1000+$r,
             'enabled'=>'$conf->formulevoyage->enabled',  // Define condition to show or hide menu entry. Use '$conf->voyage->enabled' if entry must be visible if module is enabled. Use '$leftmenu==\'system\'' to show if leftmenu system is selected.
-            'perms'=>'',			                // Use 'perms'=>'$user->rights->voyage->level1->level2' if you want your menu with a permission rules
+            'perms'=> '$user->rights->formulevoyage->formule->write',			                // Use 'perms'=>'$user->rights->voyage->level1->level2' if you want your menu with a permission rules
             'target'=>'',
             'user'=>2,				                // 0=Menu for internal users, 1=external users, 2=both
         );
