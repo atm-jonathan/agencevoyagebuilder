@@ -34,7 +34,7 @@ class box_last_formule extends ModeleBoxes
     public $boxcode = "box_last_formule";
     public $boximg = "formule";
     public $boxlabel;
-    public $depends = array("formule");
+    public $depends = array("formulevoyage");
     /**
      * @var DoliDB Database handler.
      */
@@ -52,7 +52,7 @@ class box_last_formule extends ModeleBoxes
         global $langs;
         $langs->load("boxes");
         $this->db = $db;
-
+        $this->enabled = true;
         $this->boxlabel = $langs->transnoentitiesnoconv("labelwidgetform");
     }
 
@@ -64,12 +64,11 @@ class box_last_formule extends ModeleBoxes
      */
     public function loadBox($max = 5) {
         global $conf, $user, $langs;
-
         $this->max = $max;
 
         require_once DOL_DOCUMENT_ROOT . "/custom/formulevoyage/class/formule.class.php";
 
-        $text = $langs->trans("BoxLastTicketDescription", $max);
+        $text = $langs->trans("labelwidgetform", $max);
         $this->info_box_head = array(
             'text' => $text,
             'limit' => dol_strlen($text),
@@ -77,28 +76,17 @@ class box_last_formule extends ModeleBoxes
 
         $this->info_box_contents[0][0] = array(
             'td' => 'class="left"',
-            'text' => $langs->trans("BoxLastTicketContent"),
+            'text' => $langs->trans("labelwidgetform"),
         );
-
-        if ($user->hasRight('formule', 'read')) {
-            $sql = "SELECT t.rowid as id, t.ref, t.track_id, t.fk_soc, t.fk_user_create, t.fk_user_assign, t.subject, t.message, t.fk_statut as status, t.type_code, t.category_code, t.severity_code, t.datec, t.date_read, t.date_close, t.origin_email,";
-            $sql .= " type.label as type_label, category.label as category_label, severity.label as severity_label,";
-            $sql .= " s.nom as company_name, s.email as socemail, s.client, s.fournisseur";
-            $sql .= " FROM " . MAIN_DB_PREFIX . "formule as t";
-            $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "c_formule_type as type ON type.code=t.type_code";
-            $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "c_formule_category as category ON category.code=t.category_code";
-            $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "c_formule_severity as severity ON severity.code=t.severity_code";
-            $sql .= " LEFT JOIN " . MAIN_DB_PREFIX . "societe as s ON s.rowid=t.fk_soc";
+        if ($user->rights->formulevoyage->formule->read) {
+            $sql = "SELECT t.rowid as id, t.ref";
+            $sql .= " FROM " . MAIN_DB_PREFIX . "formulevoyage_formule as t";
             $sql .= " WHERE t.entity IN (" . getEntity('formule') . ")";
             //          $sql.= " AND e.rowid = er.fk_event";
             //if (empty($user->rights->societe->client->voir) && !$user->socid) $sql.= " WHERE s.rowid = sc.fk_soc AND sc.fk_user = ".((int) $user->id);
-            if ($user->socid) {
-                $sql .= " AND t.fk_soc= " . ((int) $user->socid);
-            }
-
             //$sql.= " AND t.fk_statut > 9";
 
-            $sql .= " ORDER BY t.datec DESC, t.rowid DESC ";
+            $sql .= " ORDER BY t.rowid DESC ";
             $sql .= $this->db->plimit($max, 0);
 
             $resql = $this->db->query($sql);
@@ -115,25 +103,12 @@ class box_last_formule extends ModeleBoxes
                     //$dateclose = $this->db->jdate($objp->date_close);
                     //$late = '';
 
-                    $formule = new Ticket($this->db);
+                    $formule = new Formule($this->db);
                     $formule->id = $objp->id;
-                    $formule->track_id = $objp->track_id;
                     $formule->ref = $objp->ref;
                     $formule->fk_statut = $objp->status;
                     $formule->status = $objp->status;
                     $formule->subject = $objp->subject;
-                    if ($objp->fk_soc > 0) {
-                        $thirdparty = new Societe($this->db);
-                        $thirdparty->id = $objp->fk_soc;
-                        $thirdparty->email = $objp->socemail;
-                        $thirdparty->client = $objp->client;
-                        $thirdparty->fournisseur = $objp->fournisseur;
-                        $thirdparty->name = $objp->company_name;
-                        $link = $thirdparty->getNomUrl(1);
-                    } else {
-                        $link = '<span title="' . $objp->origin_email . '">' . dol_print_email($objp->origin_email) . '</span>';
-                    }
-
                     $r = 0;
 
                     // Ticket

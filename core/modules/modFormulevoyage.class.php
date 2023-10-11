@@ -255,9 +255,14 @@ class modFormulevoyage extends DolibarrModules
 
 		// Boxes/Widgets
 		// Add here list of php file(s) stored in formulevoyage/core/boxes that contains a class to show a widget.
+
         $this->boxes = array(
-            0=>array('file'=>'box_last_formule.php', 'enabledbydefaulton'=>'Home'),
-        ); // Boxes list
+              0 => array(
+                  'file' => 'box_last_formule.php@formulevoyage',
+                  'note' => 'Widget provided by formulevoyage',
+                  'enabledbydefaulton' => 'Home',
+              ),
+        );
 
 		// Cronjobs (List of cron jobs entries to add when module is enabled)
 		// unit_frequency must be 60 for minute, 3600 for hour, 86400 for day, 604800 for week
