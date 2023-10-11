@@ -16,7 +16,7 @@
  */
 
 /**
- *       \file       htdocs/formulevoyage/ajax/myobject.php
+ *       \file       htdocs/formulevoyage/ajax/formule.php
  *       \brief      File to return Ajax response on product list request
  */
 
@@ -48,14 +48,14 @@ require '../../main.inc.php';
 $mode = GETPOST('mode', 'aZ09');
 
 // Security check
-restrictedArea($user, 'formulevoyage', 0, 'myobject');
+restrictedArea($user, 'formulevoyage', 0, 'formule');
 
 
 /*
  * View
  */
 
-dol_syslog("Call ajax formulevoyage/ajax/myobject.php");
+dol_syslog("Call ajax formulevoyage/ajax/formule.php");
 
 top_httphead('application/json');
 
