@@ -52,3 +52,6 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
+Readformulevoyage = Lire formule de voyage
+CreateUpdateformulevoyage = Créer / modifier formule de voyage
+Deleteformulevoyage = Supprimer formule de voyage
