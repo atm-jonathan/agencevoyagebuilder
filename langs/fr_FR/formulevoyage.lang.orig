@@ -60,7 +60,10 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
-messageLengthInput = Description de la formule trop courte, 5 caractère minimum
+<<<<<<< HEAD:langs/fr_FR/formulevoyage.lang
 Readformulevoyage = Lire formule de voyage
 CreateUpdateformulevoyage = Créer / modifier formule de voyage
 Deleteformulevoyage = Supprimer formule de voyage
+=======
+messageLengthInput = Description de la formule trop courte, 5 caractère minimum
+>>>>>>> 4449f27c3262a236bd060ada05f4cf0675c36e9d:langs/en_US/formulevoyage.lang
