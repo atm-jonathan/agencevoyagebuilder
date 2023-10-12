@@ -79,14 +79,14 @@ class box_last_formule extends ModeleBoxes
             'text' => $langs->trans("labelwidgetform"),
         );
         if ($user->rights->formulevoyage->formule->read) {
-            $sql = "SELECT t.rowid as id, t.ref";
+            $sql = "SELECT t.rowid as id, t.ref, t.date_creation, t.tarif";
             $sql .= " FROM " . MAIN_DB_PREFIX . "formulevoyage_formule as t";
-            $sql .= " WHERE t.entity IN (" . getEntity('formule') . ")";
+            $sql .= " WHERE t.entity IN (" . getEntity('formule') . ") AND t.status = 1";
             //          $sql.= " AND e.rowid = er.fk_event";
             //if (empty($user->rights->societe->client->voir) && !$user->socid) $sql.= " WHERE s.rowid = sc.fk_soc AND sc.fk_user = ".((int) $user->id);
             //$sql.= " AND t.fk_statut > 9";
 
-            $sql .= " ORDER BY t.rowid DESC ";
+            $sql .= " ORDER BY t.rowid DESC";
             $sql .= $this->db->plimit($max, 0);
 
             $resql = $this->db->query($sql);
@@ -106,6 +106,8 @@ class box_last_formule extends ModeleBoxes
                     $formule = new Formule($this->db);
                     $formule->id = $objp->id;
                     $formule->ref = $objp->ref;
+                    $formule->date_creation = $objp->date_creation;
+                    $formule->tarif = $objp->tarif;
                     $formule->fk_statut = $objp->status;
                     $formule->status = $objp->status;
                     $formule->subject = $objp->subject;

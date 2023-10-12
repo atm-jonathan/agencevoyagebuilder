@@ -60,5 +60,8 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
-notewidgetform = Mes derniéres formules de voyages
-labelwidgetform = Derniéres formules de voyages
+notewidgetform = Mes 5 dernières formules de voyages
+labelwidgetform = Mes 5 dernières formules de voyages
+Datec = Date création
+validated = Validé
+boxeTarif = Tarif
