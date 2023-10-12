@@ -1144,8 +1144,9 @@ class Formule extends CommonObject
      * @return int  1 if OK, 0 if KO
      */
     public static function requireLenghtInput(string $input) {
+        global $langs;
         if (strlen($input) < 5 ){
-            setEventMessage('Description de la formule trop courte, 5 caractère minimum', 'errors');
+            setEventMessage( $langs->trans('messageLengthInput'), 'errors');
             return 0;
         }else{
             return 1;
