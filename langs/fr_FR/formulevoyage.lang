@@ -62,5 +62,5 @@ MyWidget = My widget
 MyWidgetDescription = My widget description
 messageLengthInput = Description de la formule trop courte, 5 caractère minimum
 Readformulevoyage = Voir les formules de voyage
-CreateUpdateformulevoyage = Créer / modifier formule de voyage
+CreateUpdateformulevoyage = Créer / modifier des formules de voyage
 Deleteformulevoyage = Supprimer formule de voyage
