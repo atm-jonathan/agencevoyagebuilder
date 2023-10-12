@@ -111,7 +111,7 @@ class modFormulevoyage extends DolibarrModules
 			),
 			// Set this to relative path of js file if module must load a js on all pages
 			'js' => array(
-				//   '/formulevoyage/js/formulevoyage.js.php',
+                //  '/formulevoyage/js/formulevoyage.js.php',
 			),
 			// Set here all hooks context managed by module. To find available hook context, make a "grep -r '>initHooks(' *" on source code. You can also set hook context to 'all'
 			'hooks' => array(
@@ -326,7 +326,7 @@ class modFormulevoyage extends DolibarrModules
 			'langs'=>'formulevoyage@formulevoyage', // Lang file to use (without .lang) by module. File must be in langs/code_CODE/ directory.
 			'position'=>1000 + $r,
 			'enabled'=>'isModEnabled("formulevoyage")', // Define condition to show or hide menu entry. Use 'isModEnabled("formulevoyage")' if entry must be visible if module is enabled.
-			'perms'=>'1', // Use 'perms'=>'$user->hasRight("formulevoyage", "Formule", "read")' if you want your menu with a permission rules
+			'perms'=> '$user->rights->formulevoyage->formule->read', // Use 'perms'=>'$user->hasRight("formulevoyage", "fomule", "read")' if you want your menu with a permission rules
 			'target'=>'',
 			'user'=>2, // 0=Menu for internal users, 1=external users, 2=both
 		);
