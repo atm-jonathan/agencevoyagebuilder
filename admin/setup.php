@@ -309,22 +309,11 @@ if ($action == 'edit') {
 	print '<a class="butAction" href="'.$_SERVER["PHP_SELF"].'?action=edit&token='.newToken().'">'.$langs->trans("Modify").'</a>';
 	print '</div>';
 }
-//else {
-//	print '<br>'.$langs->trans("NothingToSetup");
-//}
 
 $moduledir = 'formulevoyage';
 $myTmpObjects = array();
 // TODO Scan list of objects
 $myTmpObjects['Formule'] = array('includerefgeneration'=>1, 'includedocgeneration'=>0, 'class'=>'formule');
-//require DOL_DOCUMENT_ROOT . '/custom/formulevoyage/class/formule.class.php';
-//$class = ucfirst($myTmpObjects['Formule']['class']);
-//$formule = new $class($db) ;
-//
-//var_dump($formule->fields);
-print $form->select_country();
-
-
 
 foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
     $myTmpObjectArray['includerefgeneration'] = 1;
@@ -582,9 +571,6 @@ foreach ($myTmpObjects as $myTmpObjectKey => $myTmpObjectArray) {
 	}
 }
 
-//if (empty($setupnotempty)) {
-//	print '<br>'.$langs->trans("NothingToSetup");
-//}
 
 // Page end
 print dol_get_fiche_end();
