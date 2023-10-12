@@ -1143,7 +1143,7 @@ class Formule extends CommonObject
      * @param string $input
      * @return int  1 if OK, 0 if KO
      */
-    public static function requireLenghtInput(string $input) {
+    public static function requireLenghtInput(string $input) :int {
         global $langs;
         if (strlen($input) < 5 ){
             setEventMessage( $langs->trans('messageLengthInput'), 'errors');
