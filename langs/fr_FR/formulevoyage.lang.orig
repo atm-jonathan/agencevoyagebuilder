@@ -1,0 +1,74 @@
+# Copyright (C) 2023 SuperAdmin
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+#
+# Generic
+#
+
+# Module label 'ModuleFormulevoyageName'
+ModuleFormulevoyageName = Formulevoyage
+# Module description 'ModuleFormulevoyageDesc'
+ModuleFormulevoyageDesc = Formulevoyage description
+
+#
+# Admin page
+#
+FormulevoyageSetup = Formule voyage setup
+Settings = Paramètres
+FormulevoyageSetupPage = Formule voyage Page de paramètres
+FORMULEVOYAGE_MYPARAM1 = My param 1
+FORMULEVOYAGE_MYPARAM1Tooltip = My param 1 tooltip
+FORMULEVOYAGE_MYPARAM2=My param 2
+FORMULEVOYAGE_MYPARAM2Tooltip=My param 2 tooltip
+
+
+#
+# About page
+#
+About = About
+FormulevoyageAbout = About Formulevoyage
+FormulevoyageAboutPage = Formulevoyage about page
+titreMenuTop = Formules voyages
+newFormule = Nouvelle Formule
+listFormule = Liste Formule
+modetransport = Mode de transport
+lireFormuleVoyage = Lire formule de voyage
+updateFormuleVoyage = Créer et mettre à jour formule de voyage
+deleteFormuleVoyage = Supprimer Formule de voyage
+
+
+#
+# Sample page
+#
+FormulevoyageArea = Home Formulevoyage
+MyPageName = My page name
+
+#
+# Sample widget
+#
+MyWidget = My widget
+MyWidgetDescription = My widget description
+<<<<<<< HEAD:langs/en_US/formulevoyage.lang
+notewidgetform = Mes 5 dernières formules de voyages
+labelwidgetform = Mes 5 dernières formules de voyages
+Datec = Date création
+validated = Validé
+boxeTarif = Tarif
+=======
+messageLengthInput = Description de la formule trop courte, 5 caractère minimum
+Readformulevoyage = Voir les formules de voyage
+CreateUpdateformulevoyage = Créer / modifier des formules de voyage
+Deleteformulevoyage = Supprimer des formules de voyage
+>>>>>>> 6ed132b15af7c42c980a13a1536a4153587d68cb:langs/fr_FR/formulevoyage.lang

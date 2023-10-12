@@ -236,7 +236,7 @@ class Formule extends CommonObject
 	 */
 	public function create(User $user, $notrigger = false)
 	{
-        $lengthOk = Formule::requireLenghtInput(GETPOST('description', 'aZ09'));
+        $lengthOk = Formule::requireLenghtInput($this->description);
         if ($lengthOk){
             $resultcreate = $this->createCommon($user, $notrigger);
         }else{
@@ -463,7 +463,7 @@ class Formule extends CommonObject
 	 */
 	public function update(User $user, $notrigger = false)
 	{
-        $lengthOk = Formule::requireLenghtInput(GETPOST('description', 'aZ09'));
+        $lengthOk = Formule::requireLenghtInput($this->description);
         if ($lengthOk){
             return $this->updateCommon($user, $notrigger);
         }else{
@@ -1145,9 +1145,10 @@ class Formule extends CommonObject
      * @param string $input
      * @return int  1 if OK, 0 if KO
      */
-    public static function requireLenghtInput(string $input) {
+    public static function requireLenghtInput(string $input) :int {
+        global $langs;
         if (strlen($input) < 5 ){
-            setEventMessage('Description de la formule trop courte, 5 caractère minimum', 'errors');
+            setEventMessage( $langs->trans('messageLengthInput'), 'errors');
             return 0;
         }else{
             return 1;

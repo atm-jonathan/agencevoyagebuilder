@@ -60,8 +60,11 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
+messageLengthInput = Description de la formule trop courte, 5 caractère minimum
+Readformulevoyage = Voir les formules de voyage
+CreateUpdateformulevoyage = Créer / modifier des formules de voyage
+Deleteformulevoyage = Supprimer des formules de voyage
 notewidgetform = Mes 5 dernières formules de voyages
 labelwidgetform = Mes 5 dernières formules de voyages
 Datec = Date création
 validated = Validé
-boxeTarif = Tarif
