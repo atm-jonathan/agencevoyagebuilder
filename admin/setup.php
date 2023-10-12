@@ -129,7 +129,7 @@ $formSetup = new FormSetup($db);
 //$formSetup->newItem('Title')->setAsTitle();
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM8
-//$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM8');
+//$item = $formSetup->newItem('tarifdefaut');
 //$TField = array(
 //	'test01' => $langs->trans('test01'),
 //	'test02' => $langs->trans('test02'),
@@ -139,11 +139,11 @@ $formSetup = new FormSetup($db);
 //	'test06' => $langs->trans('test06'),
 //);
 //$item->setAsMultiSelect($TField);
-//$item->helpText = $langs->transnoentities('FORMULEVOYAGE_MYPARAM8');
 //
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM9
-//$formSetup->newItem('FORMULEVOYAGE_MYPARAM9')->setAsSelect($TField);
+$item = $formSetup->newItem('tarifdefaut');
+$item->helpText = $langs->transnoentities('tarifdefauthelp');
 //
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM10

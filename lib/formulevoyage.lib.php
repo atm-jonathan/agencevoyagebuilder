@@ -54,13 +54,18 @@ function formulevoyageAdminPrepareHead()
 	$head[$h][2] = 'formule_extrafields';
 	$h++;
 	*/
+    $head[$h][0] = dol_buildpath("/formulevoyage/admin/tarifpays.php", 1);
+    $head[$h][1] = $langs->trans("tarifpays");
+    $head[$h][2] = 'tarifpays';
+    $h++;
 
-	$head[$h][0] = dol_buildpath("/formulevoyage/admin/about.php", 1);
-	$head[$h][1] = $langs->trans("About");
-	$head[$h][2] = 'about';
-	$h++;
+    $head[$h][0] = dol_buildpath("/formulevoyage/admin/about.php", 1);
+    $head[$h][1] = $langs->trans("About");
+    $head[$h][2] = 'about';
+    $h++;
 
-	// Show more tabs from modules
+
+    // Show more tabs from modules
 	// Entries must be declared in modules descriptor with line
 	//$this->tabs = array(
 	//	'entity:+tabname:Title:@formulevoyage:/formulevoyage/mypage.php?id=__ID__'

@@ -63,3 +63,6 @@ MyWidgetDescription = My widget description
 Readformulevoyage = Lire formule de voyage
 CreateUpdateformulevoyage = Créer / modifier formule de voyage
 Deleteformulevoyage = Supprimer formule de voyage
+tarifdefaut = Tarif par défaut par pays
+tarifdefauthelp = Tarif par défaut par pays sélectionné si aucun défini
+tarifpays = Tarif pays

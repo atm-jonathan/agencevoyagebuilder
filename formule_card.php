@@ -275,6 +275,7 @@ if ($action == 'create') {
 		print '<input type="hidden" name="dol_openinpopup" value="'.$dol_openinpopup.'">';
 	}
 
+
 	print dol_get_fiche_head(array(), '');
 
 	// Set some default values
