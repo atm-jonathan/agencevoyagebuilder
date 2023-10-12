@@ -68,13 +68,20 @@ $action = GETPOST('action', 'aZ09');
 $backtopage = GETPOST('backtopage', 'alpha');
 
 
+
 /*
  * Actions
  */
 
 if ($action == "viewTarif"){
     $country_id = GETPOST('country_id', 'aZ09');
-    $country_id = GETPOST('999', 'aZ09');
+    $tarif = GETPOST('tarif', 'aZ09');
+    $checkExitTarif = checkTarifPays($country_id );
+    if (!empty($checkExitTarif)){
+        updateTarifCountry($country_id, $tarif);
+    }else{
+        insertTarifCountry($country_id, $tarif);
+    }
 }
 
 
@@ -98,16 +105,18 @@ print load_fiche_titre($langs->trans($page_name), $linkback, 'title_setup');
 $head = formulevoyageAdminPrepareHead();
 print dol_get_fiche_head($head, 'tarifpays', $langs->trans($page_name), 0, 'formulevoyage@formulevoyage');
 
+
 print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="viewTarif">';
 print '<div>';
-print '<div>';
+print '<div>Pays : ';
+
 print $form->select_country('selectcountry_id');
 print '</div>';
-print '<div>';
-print '<input type="text" name="tarif">';
-print '<input type="submit" name="Envoyer">';
+print '<div>Tarif :';
+print '<input type="number" name="tarif">';
+print '<input type="submit" value="Enregistrer">';
 print '</div>';
 print '</div>';
 print '</form>';

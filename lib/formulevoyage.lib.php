@@ -79,3 +79,53 @@ function formulevoyageAdminPrepareHead()
 
 	return $head;
 }
+/**
+ * Si tarif existant return le tarif
+ * @param string|int $id_country
+ * @return string   tarif
+ */
+function checkTarifPays($id_country) {
+    global $db;
+    $tReq = array();
+    $sql = "SELECT tarif FROM ";
+    $sql .= MAIN_DB_PREFIX . "country_tarif ";
+    $sql .= "WHERE fk_country = " . $id_country;
+    $resql = $db->query($sql);
+    while ($tArr = $db->fetch_array($resql)){
+        $tReq[] = $tArr;
+    }
+    return  $tReq[0][0];
+}
+
+//    return $result;
+
+/**
+ * Met à jour le tarif du pays
+ * @param string|int $id_country
+ * @param  string|int $tarif
+ * @return int
+ */
+function updateTarifCountry($id_country, $tarif) {
+    global $db;
+    $sql = "UPDATE " . MAIN_DB_PREFIX . "country_tarif SET tarif =" . $tarif;
+    $sql .= " WHERE " . MAIN_DB_PREFIX . "country_tarif.fk_country =" . $id_country;
+    $resql = $db->query($sql);
+    return $resql;
+}
+
+/**
+ * Insert le tarif du pays
+ * @param string|int $id_country
+ * @param string|int $tarif
+ * @return array
+ */
+function insertTarifCountry($id_country, $tarif) {
+    global $db;
+    $sql = "INSERT INTO ".MAIN_DB_PREFIX ;
+    $sql .= "country_tarif (`fk_country`, `tarif`)";
+    $sql .= "VALUES ($id_country, $tarif)";
+    $resql = $db->query($sql);
+
+    return $resql;
+}
+

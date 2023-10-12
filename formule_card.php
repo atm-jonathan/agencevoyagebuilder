@@ -78,6 +78,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formprojet.class.php';
 require __DIR__ .'/class/formule.class.php';
 require __DIR__ .'/lib/formulevoyage_formule.lib.php';
+require __DIR__ .'/lib/formulevoyage.lib.php';
 
 // Load translation files required by the page
 $langs->loadLangs(array("formulevoyage@formulevoyage", "other"));
@@ -223,6 +224,8 @@ if (empty($reshook)) {
 
 
 
+
+
 /*
  * View
  */
@@ -253,6 +256,17 @@ llxHeader('', $title, $help_url);
 
 // Part to create
 if ($action == 'create') {
+    $country = GETPOST('fk_country', 'az09');
+    if (!empty($country) && $country != -1){
+        $tarifPaysSelect = checkTarifPays($country);
+        if (empty($tarifPaysSelect )){
+            $_POST['tarif'] = $conf->global->tarifdefaut;
+            setEventMessage('Le tarif par défault a été appliqué');
+        }else{
+            $_POST['tarif'] = $tarifPaysSelect;
+        }
+    }
+
 	if (empty($permissiontoadd)) {
 		accessforbidden('NotEnoughPermissions', 0, 1);
 	}
@@ -518,6 +532,45 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 	include DOL_DOCUMENT_ROOT.'/core/tpl/card_presend.tpl.php';
 }
+
+if (!empty($conf->use_javascript_ajax)) { ?>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#fk_country").change(function() {
+        // Déclencher manuellement la mise à jour de Select2
+        $("#fk_country").trigger("change.select2");
+
+        // Attendre un court instant pour permettre la mise à jour de l\'interface utilisateur
+    setTimeout(function() {
+        // Récupérer le texte du conteneur Select2
+        var select2ContainerText = $("#select2-fk_country-container").text().trim();
+        $("#fk_country option").each(function(index, option) {
+            // Accéder à la valeur et au texte de chaque option
+            var id_country = $(option).val();
+            var optionText = $(option).text().trim();
+
+            // Comparer avec le texte du conteneur Select2
+            if (select2ContainerText === optionText) {
+                // Créer un formulaire dynamique
+                var form = $('<form action="" method="post"></form>');
+                // Ajouter un champ de formulaire avec optionValue comme valeur
+                form.append('<input type="hidden" name="fk_country" value="' + id_country + '">');
+                form.append('<input type="hidden" name="token" value="<?php echo newToken()?>">');
+
+                // Ajouter le formulaire au DOM et le soumettre
+                form.appendTo('body').submit();
+            }
+        });
+
+        // Faire quelque chose avec le texte récupéré
+    }, 50); // Vous pouvez ajuster le délai en fonction de vos besoins
+    });
+});
+</script> <?php
+}
+
+
+
 
 // End of page
 llxFooter();
