@@ -463,7 +463,7 @@ class Formule extends CommonObject
 	 */
 	public function update(User $user, $notrigger = false)
 	{
-        $lengthOk = Formule::requireLenghtInput(GETPOST('description', 'aZ09'));
+        $lengthOk = Formule::requireLenghtInput($this->description);
         if ($lengthOk){
             return $this->updateCommon($user, $notrigger);
         }else{
