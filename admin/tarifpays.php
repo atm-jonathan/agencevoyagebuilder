@@ -73,7 +73,8 @@ $backtopage = GETPOST('backtopage', 'alpha');
  */
 
 if ($action == "viewTarif"){
-    var_dump($_POST);
+    $country_id = GETPOST('country_id', 'aZ09');
+    $country_id = GETPOST('999', 'aZ09');
 }
 
 
@@ -102,10 +103,11 @@ print '<input type="hidden" name="token" value="'.newToken().'">';
 print '<input type="hidden" name="action" value="viewTarif">';
 print '<div>';
 print '<div>';
-print $form->select_country();
+print $form->select_country('selectcountry_id');
 print '</div>';
 print '<div>';
-print '<input type="text" name="">';
+print '<input type="text" name="tarif">';
+print '<input type="submit" name="Envoyer">';
 print '</div>';
 print '</div>';
 print '</form>';
