@@ -236,8 +236,12 @@ class Formule extends CommonObject
 	 */
 	public function create(User $user, $notrigger = false)
 	{
-		$resultcreate = $this->createCommon($user, $notrigger);
-
+        $lengthOk = Formule::requireLenghtInput($this->description);
+        if ($lengthOk){
+            $resultcreate = $this->createCommon($user, $notrigger);
+        }else{
+            return 0;
+        }
 		//$resultvalidate = $this->validate($user, $notrigger);
 
 		return $resultcreate;
@@ -459,7 +463,12 @@ class Formule extends CommonObject
 	 */
 	public function update(User $user, $notrigger = false)
 	{
-		return $this->updateCommon($user, $notrigger);
+        $lengthOk = Formule::requireLenghtInput($this->description);
+        if ($lengthOk){
+            return $this->updateCommon($user, $notrigger);
+        }else{
+            return 0;
+        }
 	}
 
 	/**
@@ -1128,5 +1137,20 @@ class Formule extends CommonObject
 
 		return $error;
 	}
+
+    /**
+     * Send a message and stop
+     * @param string $input
+     * @return int  1 if OK, 0 if KO
+     */
+    public static function requireLenghtInput(string $input) :int {
+        global $langs;
+        if (strlen($input) < 5 ){
+            setEventMessage( $langs->trans('messageLengthInput'), 'errors');
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 }
 

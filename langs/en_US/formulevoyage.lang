@@ -60,3 +60,4 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
+messageLengthInput = Description de la formule trop courte, 5 caractère minimum
