@@ -79,10 +79,10 @@ function formulevoyageAdminPrepareHead()
 
 	return $head;
 }
+
 /**
- * Si tarif existant return le tarif
- * @param string|int $id_country
- * @return string   tarif
+ * @param $id_country
+ * @return mixed
  */
 function checkTarifPays($id_country) {
     global $db;
@@ -98,10 +98,9 @@ function checkTarifPays($id_country) {
 }
 
 /**
- * Met à jour le tarif du pays
- * @param string|int $id_country
- * @param  string|int $tarif
- * @return int
+ * @param $id_country
+ * @param $tarif
+ * @return bool|resource
  */
 function updateTarifCountry($id_country, $tarif) {
     global $db;
@@ -112,10 +111,9 @@ function updateTarifCountry($id_country, $tarif) {
 }
 
 /**
- * Insert le tarif du pays
- * @param string|int $id_country
- * @param string|int $tarif
- * @return array
+ * @param $id_country
+ * @param $tarif
+ * @return bool|resource
  */
 function insertTarifCountry($id_country, $tarif) {
     global $db;
@@ -126,6 +124,10 @@ function insertTarifCountry($id_country, $tarif) {
     return $resql;
 }
 
+/**
+ * @param $id_country
+ * @return bool|resource
+ */
 function deleteTarifCountry($id_country) {
     global $db;
     $sql = "DELETE FROM ".MAIN_DB_PREFIX ;
