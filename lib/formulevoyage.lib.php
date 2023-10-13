@@ -115,6 +115,7 @@ function modififyContentIputTarif($country) {
         $_POST['tarif'] = $conf->global->tarifdefaut;
         setEventMessage('noCountrySelect');
     }
+
 }
 
 //    return $result;

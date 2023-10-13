@@ -165,6 +165,7 @@ if (!$permissiontoread) {
  * Actions
  */
 
+
 $parameters = array();
 $reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action); // Note that $action and $object may have been modified by some hooks
 if ($reshook < 0) {
@@ -252,13 +253,22 @@ llxHeader('', $title, $help_url);
 // 	});
 // });
 // </script>';
+if ($action == 'machin') {
+    $country = GETPOST('fk_country', 'az09');
+
+    modififyContentIputTarif($country);
+}
+var_dump($form);
+//$object->fields = dol_sort_array($object->fields, 'position');
+//foreach ($object->fields as $key => $val) {
+//
+//}
 
 
 // Part to create
 if ($action == 'create') {
-    $country = GETPOST('fk_country', 'az09');
-
-        modififyContentIputTarif($country);
+//        $country = GETPOST('fk_country', 'az09');
+//        modififyContentIputTarif($country);
 
 	if (empty($permissiontoadd)) {
 		accessforbidden('NotEnoughPermissions', 0, 1);
@@ -310,8 +320,8 @@ if ($action == 'create') {
 // Part to edit record
 if (($id || $ref) && $action == 'edit') {
 	print load_fiche_titre($langs->trans("Formule"), '', 'object_'.$object->picto);
-    $country = GETPOST('fk_country', 'az09');
-    modififyContentIputTarif($country);
+//    $country = GETPOST('fk_country', 'az09');
+//    modififyContentIputTarif($country);
 
 	print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
@@ -539,10 +549,26 @@ if (!empty($conf->use_javascript_ajax)) { ?>
                     var id_country = $(option).val();
                     var optionText = $(option).text().trim();
                     if (select2ContainerText === optionText) {
-                        var form = $('<form action="" method="post"></form>');
-                        form.append('<input type="hidden" name="fk_country" value="' + id_country + '">');
-                        form.append('<input type="hidden" name="token" value="<?php echo newToken()?>">');
-                        form.appendTo('body').submit();
+                        //var form = $('<form action="" method="post"></form>');
+                        //form.append('<input type="hidden" name="fk_country" value="' + id_country + '">');
+                        //form.append('<input type="hidden" name="token" value="<?php //echo newToken()?>//">');
+                        //form.appendTo('body').submit();
+                        $.ajax({
+                            type: "POST",
+                            url: "formule_card.php", // Assurez-vous de fournir le bon chemin vers votre script PHP
+                            data: {
+                                fk_country: id_country,
+                                action: 'machin',
+                                token: "<?php echo newToken()?>"
+                            },
+                            success: function(response) {
+                                // Traiter la réponse si nécessaire
+                                console.log(response);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Erreur lors de la requête AJAX :", status, error);
+                            }
+                        });
                     }
                 });
             }, 50); // delai
