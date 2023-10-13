@@ -143,6 +143,8 @@ $formSetup = new FormSetup($db);
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM9
 $item = $formSetup->newItem('tarifdefaut');
+$item->fieldAttr['type'] = 'number';
+$item->fieldAttr['step'] = '0.01';
 $item->helpText = $langs->transnoentities('tarifdefauthelp');
 //
 //
@@ -165,10 +167,16 @@ $setupnotempty += count($formSetup->items);
 
 $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 
-
 /*
  * Actions
  */
+$tarifDefaut = GETPOST('tarifdefaut');
+
+if (!empty($tarifDefaut) && !is_numeric(GETPOST('tarifdefaut'))){
+    setEventMessage('errorNum');
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit;
+}
 
 // For retrocompatibility Dolibarr < 15.0
 if ( versioncompare(explode('.', DOL_VERSION), array(15)) < 0 && $action == 'update' && !empty($user->admin)) {

@@ -76,3 +76,5 @@ noCountrySelect = Aucun pays selectionné, le tarif par défault à été appliq
 submitTarif = Enregistrer
 tarifCountryUpdate = Le tarif du pays a été mis à jour
 tarifCountryInsert = Le tarif du pays a été enregistrer
+errorNum = Saisir valeur numérique
+tarifExist = Ce tarif est déja renseigné

@@ -78,14 +78,18 @@ $backtopage = GETPOST('backtopage', 'alpha');
 if ($action == "viewTarif"){
     $country_id = GETPOST('country_id', 'aZ09');
     $tarif = GETPOST('tarif', 'aZ09');
-    $checkExitTarif = checkTarifPays($country_id );
+    $checkExitTarif = checkTarifPays($country_id);
     if (!empty($checkExitTarif)){
-        updateTarifCountry($country_id, $tarif);
-        setEventMessage('tarifCountryUpdate');
+//        updateTarifCountry($country_id, $tarif);
+        setEventMessage('tarifExist', 'warning');
     }else{
         insertTarifCountry($country_id, $tarif);
         setEventMessage('tarifCountryInsert');
     }
+}
+
+if ($action == 'delete' && !empty(GETPOST('id', 'int'))){
+    deleteTarifCountry(GETPOST('id', 'int'));
 }
 
 
@@ -97,6 +101,7 @@ $form = new Form($db);
 
 $help_url = '';
 $page_name = "tarifpays";
+$url = $_SERVER['PHP_SELF'];
 
 llxHeader('', $langs->trans($page_name), $help_url);
 
@@ -109,21 +114,67 @@ print load_fiche_titre($langs->trans($page_name), $linkback, 'title_setup');
 $head = formulevoyageAdminPrepareHead();
 print dol_get_fiche_head($head, 'tarifpays', $langs->trans($page_name), 0, 'formulevoyage@formulevoyage');
 
+$formAddtarif = '';
+$formAddtarif = '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
+$formAddtarif .= '<input type="hidden" name="token" value="'.newToken().'">';
+$formAddtarif .= '<input type="hidden" name="action" value="viewTarif">';
+$formAddtarif .= '<table>';
+$formAddtarif .= '<tbody>';
+$formAddtarif .= '<th>';
+$formAddtarif .= '<div>Pays : ';
+$formAddtarif .= $form->select_country('selectcountry_id');
+$formAddtarif .= '</div>';
+$formAddtarif .= '</th>';
+$formAddtarif .= '<th>';
+$formAddtarif .= '<div>Tarif :';
+$formAddtarif .= '<input type="number" name="tarif">';
+$formAddtarif .= '</div>';
+$formAddtarif .= '</th>';
+$formAddtarif .= '<th>';
+$formAddtarif .= '<div>';
+$formAddtarif .= '<input class="butAction" type="submit" value="'.$langs->trans('submitTarif').'">';
+$formAddtarif .= '</div>';
+$formAddtarif .= '</th>';
+$formAddtarif .= '</tbody>';
+$formAddtarif .= '</table>';
+$formAddtarif .= '<div>';
 
-print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
-print '<input type="hidden" name="token" value="'.newToken().'">';
-print '<input type="hidden" name="action" value="viewTarif">';
-print '<div>';
-print '<div>Pays : ';
+$sql = "SELECT ct.rowid, c.label, ct.tarif FROM ".MAIN_DB_PREFIX."c_country c INNER JOIN llx_country_tarif ct";
+$sql .= " WHERE c.rowid = ct.fk_country";
+$result = $db->query($sql);
+if ($result) {
+    $num = $db->num_rows($result);
+    $i = 0;
 
-print $form->select_country('selectcountry_id');
-print '</div>';
-print '<div>Tarif :';
-print '<input type="number" name="tarif">';
-print '<input type="submit" value="'.$langs->trans('submitTarif').'">';
-print '</div>';
-print '</div>';
-print '</form>';
+    $formAddtarif .=  '<div class="div-table-responsive">'; // You can use div-table-responsive-no-min if you dont need reserved height for your table
+    $formAddtarif .=  '<table class="noborder centpercent">';
+    $formAddtarif .=  '<tr class="liste_titre">';
+    print $formAddtarif;
+   print_liste_field_titre("label", $_SERVER["PHP_SELF"], "c.label", "", "", "");
+   print_liste_field_titre("tarif", $_SERVER["PHP_SELF"], "ct.tarif", "", "", "");
+    $rowCountry = '';
+    $rowCountry =  "</tr>\n";
+
+    if ($num > 0) {
+        while ($i < $num) {
+            $obj = $db->fetch_object($result);
+            $rowCountry .=  '<tr class="oddeven">';
+            $rowCountry .=  '<td>'.dol_escape_htmltag($obj->label).'</td>';
+            $rowCountry .=  '<td>'.price(dol_escape_htmltag($obj->tarif)).' €</td>';
+            $rowCountry .=  '<td><a class="reposition marginleftonly paddingleft marginrightonly paddingright" href="'.$url.'?id='.$obj->rowid.'&action=delete&token='.newToken().'">'.img_delete().'</a></td>';
+            $rowCountry .=  "</tr>\n";
+            $i++;
+        }
+    } else {
+        $rowCountry .=  '<tr class="oddeven"><td colspan="7"><span class="opacitymedium">'.$langs->trans("None").'</span></td></tr>';
+    }
+
+    $rowCountry .=  '</table>';
+    $rowCountry .=  '</div>';
+} else {
+    dol_print_error($db);
+}
+print $rowCountry;
 
 
 // Page end
