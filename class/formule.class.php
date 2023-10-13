@@ -722,6 +722,8 @@ class Formule extends CommonObject
 			$datas['picto'] .= ' '.$this->getLibStatut(5);
 		}
 		$datas['ref'] .= '<br><b>'.$langs->trans('Ref').':</b> '.$this->ref;
+        $datas['datec'] .= '<br><b>'.$langs->trans('Datec').':</b> '.dol_print_date($this->date_creation, '%d/%m/%Y' );
+        $datas['tarif'] .= '<br><b>'.$langs->trans('boxeTarif').':</b> '.price($this->tarif). ' €';
 
 		return $datas;
 	}

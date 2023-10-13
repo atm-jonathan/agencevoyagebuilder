@@ -72,7 +72,7 @@ class modFormulevoyage extends DolibarrModules
 		$this->editor_url = '';
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.1.0';
+		$this->version = '1.3.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
@@ -256,12 +256,11 @@ class modFormulevoyage extends DolibarrModules
 		// Boxes/Widgets
 		// Add here list of php file(s) stored in formulevoyage/core/boxes that contains a class to show a widget.
         $this->boxes = array(
-            //  0 => array(
-            //      'file' => 'formulevoyagewidget1.php@formulevoyage',
-            //      'note' => 'Widget provided by Formulevoyage',
-            //      'enabledbydefaulton' => 'Home',
-            //  ),
-            //  ...
+              0 => array(
+                  'file' => 'box_last_formule.php@formulevoyage',
+                  'note' => 'Widget provided by formulevoyage',
+                  'enabledbydefaulton' => 'Home',
+              ),
         );
 
 		// Cronjobs (List of cron jobs entries to add when module is enabled)
