@@ -165,8 +165,7 @@ if (!$permissiontoread) {
  * Actions
  */
 
-
-$parameters = array();
+    $parameters = array();
 $reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action); // Note that $action and $object may have been modified by some hooks
 if ($reshook < 0) {
 	setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
@@ -222,7 +221,14 @@ if (empty($reshook)) {
 	include DOL_DOCUMENT_ROOT.'/core/actions_sendmails.inc.php';
 }
 
-
+if (GETPOST('action', 'aZ09') == 'add') {
+    $tarif = $_POST['tarif'];
+    $tarif = price2num($tarif, 2);
+    $tarifDefaut = price2num($conf->global->tarifdefaut, 2);
+    if ($tarif == $tarifDefaut) {
+        setEventMessage('noTarifCountry');
+    }
+}
 
 
 
@@ -239,37 +245,8 @@ $title = $langs->trans("Formule");
 $help_url = '';
 llxHeader('', $title, $help_url);
 
-// Example : Adding jquery code
-// print '<script type="text/javascript">
-// jQuery(document).ready(function() {
-// 	function init_myfunc()
-// 	{
-// 		jQuery("#myid").removeAttr(\'disabled\');
-// 		jQuery("#myid").attr(\'disabled\',\'disabled\');
-// 	}
-// 	init_myfunc();
-// 	jQuery("#mybutton").click(function() {
-// 		init_myfunc();
-// 	});
-// });
-// </script>';
-if ($action == 'machin') {
-    $country = GETPOST('fk_country', 'az09');
-
-    modififyContentIputTarif($country);
-}
-var_dump($form);
-//$object->fields = dol_sort_array($object->fields, 'position');
-//foreach ($object->fields as $key => $val) {
-//
-//}
-
-
 // Part to create
 if ($action == 'create') {
-//        $country = GETPOST('fk_country', 'az09');
-//        modififyContentIputTarif($country);
-
 	if (empty($permissiontoadd)) {
 		accessforbidden('NotEnoughPermissions', 0, 1);
 	}
@@ -320,8 +297,6 @@ if ($action == 'create') {
 // Part to edit record
 if (($id || $ref) && $action == 'edit') {
 	print load_fiche_titre($langs->trans("Formule"), '', 'object_'.$object->picto);
-//    $country = GETPOST('fk_country', 'az09');
-//    modififyContentIputTarif($country);
 
 	print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
@@ -458,22 +433,6 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 				print dolGetButtonAction('', $langs->trans('ToClone'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.(!empty($object->socid)?'&socid='.$object->socid:'').'&action=clone&token='.newToken(), '', $permissiontoadd);
 			}
 
-			/*
-			if ($permissiontoadd) {
-				if ($object->status == $object::STATUS_ENABLED) {
-					print dolGetButtonAction('', $langs->trans('Disable'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=disable&token='.newToken(), '', $permissiontoadd);
-				} else {
-					print dolGetButtonAction('', $langs->trans('Enable'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=enable&token='.newToken(), '', $permissiontoadd);
-				}
-			}
-			if ($permissiontoadd) {
-				if ($object->status == $object::STATUS_VALIDATED) {
-					print dolGetButtonAction('', $langs->trans('Cancel'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=close&token='.newToken(), '', $permissiontoadd);
-				} else {
-					print dolGetButtonAction('', $langs->trans('Re-Open'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=reopen&token='.newToken(), '', $permissiontoadd);
-				}
-			}
-			*/
 
 			// Delete
 			$params = array();
@@ -549,21 +508,17 @@ if (!empty($conf->use_javascript_ajax)) { ?>
                     var id_country = $(option).val();
                     var optionText = $(option).text().trim();
                     if (select2ContainerText === optionText) {
-                        //var form = $('<form action="" method="post"></form>');
-                        //form.append('<input type="hidden" name="fk_country" value="' + id_country + '">');
-                        //form.append('<input type="hidden" name="token" value="<?php //echo newToken()?>//">');
-                        //form.appendTo('body').submit();
                         $.ajax({
                             type: "POST",
-                            url: "formule_card.php", // Assurez-vous de fournir le bon chemin vers votre script PHP
+                            url: "input_tarif.php",
                             data: {
                                 fk_country: id_country,
-                                action: 'machin',
                                 token: "<?php echo newToken()?>"
                             },
+                            dataType: "json",
                             success: function(response) {
-                                // Traiter la réponse si nécessaire
-                                console.log(response);
+                                let tarif = document.getElementById('tarif');
+                                tarif.value = response.tarif;
                             },
                             error: function(xhr, status, error) {
                                 console.error("Erreur lors de la requête AJAX :", status, error);
