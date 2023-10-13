@@ -174,6 +174,7 @@ if ($result) {
 } else {
     dol_print_error($db);
 }
+
 print $rowCountry;
 
 
