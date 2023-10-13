@@ -123,14 +123,11 @@ function insertTarifCountry($id_country, $tarif) {
     $sql .= "country_tarif (`fk_country`, `tarif`)";
     $sql .= "VALUES ($id_country, $tarif)";
     $resql = $db->query($sql);
-
     return $resql;
 }
 
 function deleteTarifCountry($id_country) {
     global $db;
-
-
     $sql = "DELETE FROM ".MAIN_DB_PREFIX ;
     $sql .= "country_tarif WHERE " .MAIN_DB_PREFIX. "country_tarif.rowid = ".$id_country;
     $resql = $db->query($sql);
