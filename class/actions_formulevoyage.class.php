@@ -364,8 +364,11 @@ class ActionsFormulevoyage
 
     public function addMoreActionsButtons($parameters, $object, $action) {
         $context = explode(':', $parameters['context']);
+        var_dump(DOL_DOCUMENT_ROOT);
+        var_dump(__DIR__);
+        var_dump(dirname(dirname(__DIR__)));
         if (in_array('propalcard',  $context)){
-            print '<a class="butAction" href="">Créer une formule de voyage</a>';
+            print '<a class="butAction" href="'.(dirname(__DIR__)).'/formule_card.php?action=create">Créer une formule de voyage</a>';
         }
     }
 
