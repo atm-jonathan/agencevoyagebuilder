@@ -81,7 +81,7 @@ function formulevoyageAdminPrepareHead()
 }
 
 /**
- * @param $id_country
+ * @param int $id_country
  * @return mixed
  */
 function checkTarifPays($id_country) {
@@ -98,8 +98,8 @@ function checkTarifPays($id_country) {
 }
 
 /**
- * @param $id_country
- * @param $tarif
+ * @param int|string $id_country
+ * @param int|string  $tarif
  * @return bool|resource
  */
 function updateTarifCountry($id_country, $tarif) {
@@ -111,8 +111,8 @@ function updateTarifCountry($id_country, $tarif) {
 }
 
 /**
- * @param $id_country
- * @param $tarif
+ * @param int|string $id_country
+ * @param int|string $tarif
  * @return bool|resource
  */
 function insertTarifCountry($id_country, $tarif) {
@@ -125,7 +125,7 @@ function insertTarifCountry($id_country, $tarif) {
 }
 
 /**
- * @param $id_country
+ * @param int|string $id_country
  * @return bool|resource
  */
 function deleteTarifCountry($id_country) {

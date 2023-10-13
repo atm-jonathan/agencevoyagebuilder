@@ -53,7 +53,7 @@ if (!$res) {
 // Libraries
 require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
-require_once '../lib/formulevoyage.lib.php';
+require_once  dirname(__DIR__).'/lib/formulevoyage.lib.php';
 
 global $langs;
 
@@ -75,7 +75,7 @@ $backtopage = GETPOST('backtopage', 'alpha');
  * Actions
  */
 
-if ($action == "viewTarif"){
+if ($action == "checkTarif"){
     $country_id = GETPOST('country_id', 'aZ09');
     $tarif = GETPOST('tarif', 'aZ09');
     $checkExitTarif = checkTarifPays($country_id);
@@ -117,16 +117,16 @@ print dol_get_fiche_head($head, 'tarifpays', $langs->trans($page_name), 0, 'form
 $formAddtarif = '';
 $formAddtarif = '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 $formAddtarif .= '<input type="hidden" name="token" value="'.newToken().'">';
-$formAddtarif .= '<input type="hidden" name="action" value="viewTarif">';
+$formAddtarif .= '<input type="hidden" name="action" value="checkTarif">';
 $formAddtarif .= '<table>';
 $formAddtarif .= '<tbody>';
 $formAddtarif .= '<th>';
-$formAddtarif .= '<div>Pays : ';
+$formAddtarif .= '<div>$langs->trans("labelInputPays")';
 $formAddtarif .= $form->select_country('selectcountry_id');
 $formAddtarif .= '</div>';
 $formAddtarif .= '</th>';
 $formAddtarif .= '<th>';
-$formAddtarif .= '<div>Tarif :';
+$formAddtarif .= '<div>$langs->trans("labelInputTarif")';
 $formAddtarif .= '<input type="number" name="tarif">';
 $formAddtarif .= '</div>';
 $formAddtarif .= '</th>';
@@ -139,7 +139,7 @@ $formAddtarif .= '</tbody>';
 $formAddtarif .= '</table>';
 $formAddtarif .= '<div>';
 
-$sql = "SELECT ct.rowid, c.label, ct.tarif FROM ".MAIN_DB_PREFIX."c_country c INNER JOIN llx_country_tarif ct";
+$sql = "SELECT ct.rowid, c.label, ct.tarif FROM ".MAIN_DB_PREFIX."c_country c INNER JOIN ".MAIN_DB_PREFIX."country_tarif ct";
 $sql .= " WHERE c.rowid = ct.fk_country";
 $result = $db->query($sql);
 if ($result) {
@@ -156,8 +156,7 @@ if ($result) {
     $rowCountry =  "</tr>\n";
 
     if ($num > 0) {
-        while ($i < $num) {
-            $obj = $db->fetch_object($result);
+        while ($obj = $db->fetch_object($result)) {
             $rowCountry .=  '<tr class="oddeven">';
             $rowCountry .=  '<td>'.dol_escape_htmltag($obj->label).'</td>';
             $rowCountry .=  '<td>'.price(dol_escape_htmltag($obj->tarif)).' €</td>';
@@ -165,9 +164,13 @@ if ($result) {
             $rowCountry .=  "</tr>\n";
             $i++;
         }
+
     } else {
         $rowCountry .=  '<tr class="oddeven"><td colspan="7"><span class="opacitymedium">'.$langs->trans("None").'</span></td></tr>';
     }
+
+
+
 
     $rowCountry .=  '</table>';
     $rowCountry .=  '</div>';

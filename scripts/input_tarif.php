@@ -30,22 +30,23 @@ if (!$res) {
     die("Include of main fails");
 }
 
-require __DIR__ .'/lib/formulevoyage.lib.php';
+require __DIR__ . '/lib/formulevoyage.lib.php';
 global $conf;
 
 $country = GETPOST('fk_country', 'az09');
+$tarif = GETPOST('tarif', 'int');
 if (!empty($country) && $country != -1 && $country != 0){
     $tarifPaysSelect = checkTarifPays($country);
     if (empty($tarifPaysSelect)){
-        $_POST['tarif'] = $conf->global->tarifdefaut;
+        $tarif = $conf->global->tarifdefaut;
     }else{
-        $_POST['tarif'] = $tarifPaysSelect;
+        $tarif = $tarifPaysSelect;
     }
 }else{
-    $_POST['tarif'] = $conf->global->tarifdefaut;
+    $tarif = $conf->global->tarifdefaut;
 }
 
-echo json_encode(array('tarif' => price($_POST['tarif'])));
+echo json_encode(array('tarif' => price($tarif)));
 
 ?>
 

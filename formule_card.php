@@ -221,8 +221,8 @@ if (empty($reshook)) {
 	include DOL_DOCUMENT_ROOT.'/core/actions_sendmails.inc.php';
 }
 
-if (GETPOST('action', 'aZ09') == 'add') {
-    $tarif = $_POST['tarif'];
+if ($action == 'add') {
+    $tarif = GETPOST('tarif', 'int');
     $tarif = price2num($tarif, 2);
     $tarifDefaut = price2num($conf->global->tarifdefaut, 2);
     if ($tarif == $tarifDefaut) {
@@ -510,7 +510,7 @@ if (!empty($conf->use_javascript_ajax)) { ?>
                     if (select2ContainerText === optionText) {
                         $.ajax({
                             type: "POST",
-                            url: "input_tarif.php",
+                            url: "scripts/input_tarif.php",
                             data: {
                                 fk_country: id_country,
                                 token: "<?php echo newToken()?>"

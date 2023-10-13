@@ -78,3 +78,5 @@ tarifCountryUpdate = Le tarif du pays a été mis à jour
 tarifCountryInsert = Le tarif du pays a été enregistrer
 errorNum = Saisir valeur numérique
 tarifExist = Ce tarif est déja renseigné
+labelInputPays = Pays :
+labelInputTarif = Tarif :

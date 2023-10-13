@@ -170,9 +170,9 @@ $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 /*
  * Actions
  */
-$tarifDefaut = GETPOST('tarifdefaut');
+$tarifDefaut = GETPOST('tarifdefaut', 'za09');
 
-if (!empty($tarifDefaut) && !is_numeric(GETPOST('tarifdefaut'))){
+if (!empty($tarifDefaut) && !is_numeric($tarifDefaut)){
     setEventMessage('errorNum');
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
