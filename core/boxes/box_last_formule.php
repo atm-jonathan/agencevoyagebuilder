@@ -66,7 +66,7 @@ class box_last_formule extends ModeleBoxes
         global $conf, $user, $langs;
         $this->max = $max;
 
-        require_once DOL_DOCUMENT_ROOT . "/custom/formulevoyage/class/formule.class.php";
+        require_once dirname(__DIR__) . "/../class/formule.class.php";
 
         $text = $langs->trans("labelwidgetform", $max);
         $this->info_box_head = array(
@@ -82,81 +82,44 @@ class box_last_formule extends ModeleBoxes
             $sql = "SELECT t.rowid as id, t.ref, t.date_creation, t.tarif";
             $sql .= " FROM " . MAIN_DB_PREFIX . "formulevoyage_formule as t";
             $sql .= " WHERE t.entity IN (" . getEntity('formule') . ") AND t.status = 1";
-            //          $sql.= " AND e.rowid = er.fk_event";
-            //if (empty($user->rights->societe->client->voir) && !$user->socid) $sql.= " WHERE s.rowid = sc.fk_soc AND sc.fk_user = ".((int) $user->id);
-            //$sql.= " AND t.fk_statut > 9";
-
             $sql .= " ORDER BY t.rowid DESC";
             $sql .= $this->db->plimit($max, 0);
 
             $resql = $this->db->query($sql);
             if ($resql) {
                 $num = $this->db->num_rows($resql);
-
                 $i = 0;
-
                 while ($i < $num) {
                     $objp = $this->db->fetch_object($resql);
-
-                    $datec = $this->db->jdate($objp->datec);
-                    //$dateterm = $this->db->jdate($objp->fin_validite);
-                    //$dateclose = $this->db->jdate($objp->date_close);
-                    //$late = '';
-
                     $formule = new Formule($this->db);
                     $formule->id = $objp->id;
                     $formule->ref = $objp->ref;
                     $formule->date_creation = $objp->date_creation;
                     $formule->tarif = $objp->tarif;
-                    $formule->fk_statut = $objp->status;
                     $formule->status = $objp->status;
-                    $formule->subject = $objp->subject;
                     $r = 0;
 
-                    // Ticket
+                    // formule
                     $this->info_box_contents[$i][$r] = array(
                         'td' => 'class="nowraponall"',
                         'text' => $formule->getNomUrl(1),
                         'asis' => 1
                     );
                     $r++;
-
-                    // Subject
                     $this->info_box_contents[$i][$r] = array(
-                        'td' => 'class="tdoverflowmax200"',
-                        'text' => '<span title="' . dol_escape_htmltag($objp->subject) . '">' . dol_escape_htmltag($objp->subject) . '</span>', // Some event have no ref
-                        'url' => DOL_URL_ROOT . "/formule/card.php?track_id=" . urlencode($objp->track_id),
+                        'td' => 'class="nowraponall"',
+                        'text' => dol_print_date($formule->date_creation, '%d/%m/%Y'),
+                        'asis' => 1
                     );
                     $r++;
-
-                    // Customer
                     $this->info_box_contents[$i][$r] = array(
-                        'td' => 'class="tdoverflowmax100"',
-                        'text' => $link,
-                        'asis' => 1,
+                        'td' => 'class="nowraponall"',
+                        'text' => price($formule->tarif) . '€',
+                        'asis' => 1
                     );
-                    $r++;
-
-                    // Date creation
-                    $this->info_box_contents[$i][$r] = array(
-                        'td' => 'class="center nowraponall" title="' . dol_escape_htmltag($langs->trans("DateCreation") . ': ' . dol_print_date($datec, 'dayhour', 'tzuserrel')) . '"',
-                        'text' => dol_print_date($datec, 'dayhour', 'tzuserrel'),
-                    );
-                    $r++;
-
-                    // Statut
-                    $this->info_box_contents[$i][$r] = array(
-                        'td' => 'class="right nowraponall"',
-                        'text' => $formule->getLibStatut(3),
-                    );
-                    $r++;
-
                     $i++;
                 }
 
-                if ($num == 0) {
-                    $this->info_box_contents[$i][0] = array('td' => '', 'text' => '<span class="opacitymedium">' . $langs->trans("BoxLastTicketNoRecordedTickets") . '</span>');
-                }
             } else {
                 dol_print_error($this->db);
             }
