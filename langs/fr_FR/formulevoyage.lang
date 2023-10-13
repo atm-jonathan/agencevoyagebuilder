@@ -66,3 +66,13 @@ Deleteformulevoyage = Supprimer formule de voyage
 tarifdefaut = Tarif par défaut par pays
 tarifdefauthelp = Tarif par défaut par pays sélectionné si aucun défini
 tarifpays = Tarif pays
+
+#
+# formulaires
+#
+
+noTarifCountry = Pas de tarif atribué à ce pays, celui par défault est appliqué
+noCountrySelect = Aucun pays selectionné, le tarif par défault à été appliqué
+submitTarif = Enregistrer
+tarifCountryUpdate = Le tarif du pays a été mis à jour
+tarifCountryInsert = Le tarif du pays a été enregistrer

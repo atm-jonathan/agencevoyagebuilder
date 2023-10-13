@@ -97,6 +97,22 @@ function checkTarifPays($id_country) {
     return  $tReq[0][0];
 }
 
+function modififyContentIputTarif($country) {
+    global $conf;
+    if (!empty($country) && $country != -1 && $country != 0){
+        $tarifPaysSelect = checkTarifPays($country);
+        if (empty($tarifPaysSelect)){
+            $_POST['tarif'] = $conf->global->tarifdefaut;
+            setEventMessage('noTarifCountry');
+        }else{
+            $_POST['tarif'] = $tarifPaysSelect;
+        }
+    }else{
+        $_POST['tarif'] = $conf->global->tarifdefaut;
+        setEventMessage('noCountrySelect');
+    }
+}
+
 //    return $result;
 
 /**

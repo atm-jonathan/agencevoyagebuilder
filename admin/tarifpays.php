@@ -55,6 +55,8 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/admin.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 require_once '../lib/formulevoyage.lib.php';
 
+global $langs;
+
 // Translations
 $langs->loadLangs(array("errors", "admin", "formulevoyage@formulevoyage"));
 
@@ -79,8 +81,10 @@ if ($action == "viewTarif"){
     $checkExitTarif = checkTarifPays($country_id );
     if (!empty($checkExitTarif)){
         updateTarifCountry($country_id, $tarif);
+        setEventMessage('tarifCountryUpdate');
     }else{
         insertTarifCountry($country_id, $tarif);
+        setEventMessage('tarifCountryInsert');
     }
 }
 
@@ -116,7 +120,7 @@ print $form->select_country('selectcountry_id');
 print '</div>';
 print '<div>Tarif :';
 print '<input type="number" name="tarif">';
-print '<input type="submit" value="Enregistrer">';
+print '<input type="submit" value="'.$langs->trans('submitTarif').'">';
 print '</div>';
 print '</div>';
 print '</form>';
