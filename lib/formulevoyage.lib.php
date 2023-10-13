@@ -96,7 +96,11 @@ function checkTarifPays($id_country) {
     }
     return  $tReq[0][0];
 }
-
+/**
+ * Modifie le contenu de l'input tarif
+ * @param string|int $id_country
+ * @return string   tarif
+ */
 function modififyContentIputTarif($country) {
     global $conf;
     if (!empty($country) && $country != -1 && $country != 0){
