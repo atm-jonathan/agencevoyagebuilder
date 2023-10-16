@@ -102,7 +102,6 @@ class ActionsFormulevoyage
 		global $conf, $user, $langs;
 
 		$error = 0; // Error counter
-        var_dump('rgkpro');
 		/* print_r($parameters); print_r($object); echo "action: " . $action; */
 		if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {	    // do something only for the context 'somecontext1' or 'somecontext2'
 			// Do what you want here...
@@ -364,11 +363,9 @@ class ActionsFormulevoyage
 
     public function addMoreActionsButtons($parameters, $object, $action) {
         $context = explode(':', $parameters['context']);
-        var_dump(DOL_DOCUMENT_ROOT);
-        var_dump(__DIR__);
-        var_dump(dirname(dirname(__DIR__)));
+        $url = dol_buildpath('formulevoyage/formule_card.php', 2);
         if (in_array('propalcard',  $context)){
-            print '<a class="butAction" href="'.(dirname(__DIR__)).'/formule_card.php?action=create">Créer une formule de voyage</a>';
+            print '<a class="butAction" href="'.$url.'?action=create&id_propal='.$object->id.'">Créer une formule de voyage</a>';
         }
     }
 

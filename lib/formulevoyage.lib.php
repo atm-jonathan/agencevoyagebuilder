@@ -74,3 +74,38 @@ function formulevoyageAdminPrepareHead()
 
 	return $head;
 }
+
+/**
+ * @param Object $object
+ * @param String $elementType
+ * @return array $Tresult   array element delete
+ */
+function deleteObjectLiee ($object, $elementType, $trigger = false){
+    global $user;
+    $Tresult = array();
+    $object->fetchObjectLinked();
+    if (!empty($object->linkedObjects)){
+        foreach ($object->linkedObjects as $TobjLink){
+            foreach ($TobjLink as $key => $objLiee){
+                if ($objLiee->element == strtolower(Propal::class) &&
+                    $objLiee->status == Propal::STATUS_SIGNED){
+                        setEventMessage('l\'élement est signé '. $objLiee->element. ' est validé suppression '.$objLiee->ref. ' impossible', 'warnings');
+                        $object->element = $object->table_element;
+                        $object->deleteObjectLinked($objLiee->id, $objLiee->element);
+                        $object->element = strtolower(get_class($object));
+                        $objLiee->deleteObjectLinked($object->id, $object->element);
+                        break;
+                }else{
+                    if ($objLiee->element == strtolower($elementType)  ){
+                        $Tresult[$key]['objectLiee'] = $objLiee->id;
+                        $res = $objLiee->delete($user, $trigger);
+                        $Tresult[$key]['typeObject'] = strtolower($elementType);
+                        $Tresult[$key]['res'] = $res;
+                    }
+                }
+            }
+        }
+    }
+    return $Tresult;
+}
+
