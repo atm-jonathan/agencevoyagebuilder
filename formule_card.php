@@ -499,36 +499,27 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 if (!empty($conf->use_javascript_ajax)) { ?>
     <script type="text/javascript">
-    $(document).ready(function () {
-        $("#fk_country").change(function() {
-            $("#fk_country").trigger("change.select2"); // Déclencher manuellement la mise à jour de Select2
-            setTimeout(function() { // Attendre un court instant
-            var select2ContainerText = $("#select2-fk_country-container").text().trim();
-                $("#fk_country option").each(function(index, option) {
-                    var id_country = $(option).val();
-                    var optionText = $(option).text().trim();
-                    if (select2ContainerText === optionText) {
-                        $.ajax({
-                            type: "POST",
-                            url: "scripts/input_tarif.php",
-                            data: {
-                                fk_country: id_country,
-                                token: "<?php echo newToken()?>"
-                            },
-                            dataType: "json",
-                            success: function(response) {
-                                let tarif = document.getElementById('tarif');
-                                tarif.value = response.tarif;
-                            },
-                            error: function(xhr, status, error) {
-                                console.error("Erreur lors de la requête AJAX :", status, error);
-                            }
-                        });
+        $(document).ready(function () {
+            $("#fk_country").on("select2:select", function (e) {
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/input_tarif.php",
+                    data: {
+                        fk_country: $(this).val(),
+                        token: "<?php echo newToken()?>"
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        let tarif = document.getElementById('tarif');
+                        tarif.value = response.tarif;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erreur lors de la requête AJAX :", status, error);
                     }
                 });
-            }, 50); // delai
+            });
         });
-    });
+
     </script> <?php
 }
 

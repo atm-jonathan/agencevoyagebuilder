@@ -30,7 +30,7 @@ if (!$res) {
     die("Include of main fails");
 }
 
-require __DIR__ . '/lib/formulevoyage.lib.php';
+require dirname(__DIR__) . '/lib/formulevoyage.lib.php';
 global $conf;
 
 $country = GETPOST('fk_country', 'az09');
