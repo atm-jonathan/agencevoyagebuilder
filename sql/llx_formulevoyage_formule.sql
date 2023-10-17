@@ -26,7 +26,7 @@ CREATE TABLE llx_formulevoyage_formule(
 	tms timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
 	fk_user_creat integer NOT NULL, 
 	fk_user_modif integer, 
-	status integer NOT NULL, 
+	status integer NOT NULL DEFAULT 0,
 	fk_mode_transport integer, 
 	date_arr datetime, 
 	date_dep datetime, 
@@ -34,3 +34,5 @@ CREATE TABLE llx_formulevoyage_formule(
 	fk_country integer NOT NULL
 	-- END MODULEBUILDER FIELDS
 ) ENGINE=innodb;
+
+
