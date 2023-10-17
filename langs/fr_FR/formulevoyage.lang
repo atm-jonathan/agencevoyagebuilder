@@ -71,3 +71,8 @@ Datec = Date création
 validated = Validé
 formule = Formule voyage
 propal = Proposition commerciale
+
+#
+# model pdf
+#
+DocModelAzurformuledevoyageDescription = 	Un modèle de proposition complet (avec mention complémentaire formule de voyage)
