@@ -102,7 +102,7 @@ function checkTarifPays($id_country) {
 function updateTarifCountry($id_country, $tarif) {
     global $db;
     $sql = "UPDATE " . MAIN_DB_PREFIX . "country_tarif SET tarif =" . $tarif;
-    $sql .= " WHERE " . MAIN_DB_PREFIX . "country_tarif.fk_country =" . $id_country;
+    $sql .= " WHERE fk_country =" . $id_country;
     $resql = $db->query($sql);
     return $resql;
 }
