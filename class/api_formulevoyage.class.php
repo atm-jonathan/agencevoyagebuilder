@@ -241,11 +241,15 @@ class FormulevoyageApi extends DolibarrApi
 	 */
 	public function put($id, $request_data = null)
 	{
+
 		if (!DolibarrApiAccess::$user->rights->formulevoyage->formule->write) {
 			throw new RestException(401);
 		}
 
 		$result = $this->formule->fetch($id);
+        if ($this->formule->status == 0){
+            $this->formule->status = '0'; // Lors de la MAJ il considere 0 comme NULL, si status n'est pas indiqué
+        }
 		if (!$result) {
 			throw new RestException(404, 'Formule not found');
 		}
@@ -262,12 +266,11 @@ class FormulevoyageApi extends DolibarrApi
 		}
 
 		// Clean data
-		// $this->formule->abc = sanitizeVal($this->formule->abc, 'alphanohtml');
-
+//		 $this->formule->abc = sanitizeVal($this->formule->abc, 'alphanohtml');
 		if ($this->formule->update(DolibarrApiAccess::$user, false) > 0) {
 			return $this->get($id);
 		} else {
-			throw new RestException(500, $this->formule->error);
+			throw new RestException(500, $this->formule->db->lasterror);
 		}
 	}
 
