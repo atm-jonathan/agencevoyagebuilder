@@ -16,9 +16,6 @@
 
 ## Version 1.3.0
 - NEW : Widget 5 dernières formules - *1.3.0* - **12/10/2023**
-- 
-## Version 1.3.0
-- NEW : Widget 5 dernières formules - *1.3.0* - **12/10/2023**
 
 ## Version 1.2.0
 - NEW : Gestion des droits - *1.2.0* - **12/10/2023**
