@@ -38,12 +38,12 @@ $tarif = GETPOST('tarif', 'int');
 if (!empty($country) && $country != -1 && $country != 0){
     $tarifPaysSelect = checkTarifPays($country);
     if (empty($tarifPaysSelect)){
-        $tarif = $conf->global->tarifdefaut;
+        $tarif =  getDolGlobalString('tarifdefaut');
     }else{
         $tarif = $tarifPaysSelect;
     }
 }else{
-    $tarif = $conf->global->tarifdefaut;
+    $tarif = getDolGlobalString('tarifdefaut');
 }
 
 echo json_encode(array('tarif' => price($tarif)));

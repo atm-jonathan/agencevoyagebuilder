@@ -224,7 +224,7 @@ if (empty($reshook)) {
 if ($action == 'add') {
     $tarif = GETPOST('tarif', 'int');
     $tarif = price2num($tarif, 2);
-    $tarifDefaut = price2num($conf->global->tarifdefaut, 2);
+    $tarifDefaut = price2num(getDolGlobalString('tarifdefaut'), 2);
     if ($tarif == $tarifDefaut) {
         setEventMessage('noTarifCountry');
     }
