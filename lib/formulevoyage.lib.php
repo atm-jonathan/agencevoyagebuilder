@@ -81,7 +81,7 @@ function formulevoyageAdminPrepareHead()
  * @return array $Tresult   array element delete
  */
 function deleteObjectLiee ($object, $elementType, $trigger = false){
-    global $user;
+    global $langs, $user;
     $Tresult = array();
     $object->fetchObjectLinked();
     if (!empty($object->linkedObjects)){
@@ -89,7 +89,7 @@ function deleteObjectLiee ($object, $elementType, $trigger = false){
             foreach ($TobjLink as $key => $objLiee){
                 if ($objLiee->element == strtolower(Propal::class) &&
                     $objLiee->status == Propal::STATUS_SIGNED){
-                        setEventMessage('l\'élement est signé '. $objLiee->element. ' est validé suppression '.$objLiee->ref. ' impossible', 'warnings');
+                       setEventMessage($langs->trans('msgDeleteLinkPropal', $objLiee->element, $objLiee->ref), 'warnings');
                         $object->element = $object->table_element;
                         $object->deleteObjectLinked($objLiee->id, $objLiee->element);
                         $object->element = strtolower(get_class($object));
