@@ -99,7 +99,7 @@ function checkTarifPays(int $id_country) {
  * @param int|string  $tarif
  * @return bool|resource
  */
-function updateTarifCountry(int $id_country, mixed $tarif) {
+function updateTarifCountry(int $id_country, string $tarif) {
     global $db;
     $sql = "UPDATE " . MAIN_DB_PREFIX . "country_tarif SET tarif =" . $tarif;
     $sql .= " WHERE fk_country =" . $id_country;
@@ -108,11 +108,11 @@ function updateTarifCountry(int $id_country, mixed $tarif) {
 }
 
 /**
- * @param int|string $id_country
- * @param int|string $tarif
+ * @param int $id_country
+ * @param string $tarif
  * @return bool|resource
  */
-function insertTarifCountry(int $id_country, mixed $tarif) {
+function insertTarifCountry(int $id_country, string $tarif) {
     global $db;
     $sql = "INSERT INTO ".MAIN_DB_PREFIX ;
     $sql .= "country_tarif (`fk_country`, `tarif`)";
