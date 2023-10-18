@@ -223,6 +223,8 @@ if (empty($reshook)) {
 
 
 
+
+
 /*
  * View
  */
@@ -337,7 +339,6 @@ if (($id || $ref) && $action == 'edit') {
 // Part to show record
 if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'create'))) {
 	$head = formulePrepareHead($object);
-
 	print dol_get_fiche_head($head, 'card', $langs->trans("Formule"), -1, $object->picto, 0, '', '', 0, '', 1);
 
 	$formconfirm = '';

@@ -47,10 +47,11 @@ function formulePrepareHead($object)
 	$h++;
 
 
-    $showtabofpagecontact = 0;
-	if ($showtabofpagecontact) {
-		$head[$h][0] = dol_buildpath("/formulevoyage/formule_contact.php", 1).'?id='.$object->id;
-		$head[$h][1] = $langs->trans("Contacts");
+	if ($showtabofpagecontact){
+        $nbContact = count($object->liste_contact());
+        $head[$h][0] = dol_buildpath("/formulevoyage/formule_contact.php", 1).'?id='.$object->id;
+        $head[$h][1] = $langs->trans("Contacts");
+        $head[$h][1] .= ($nbContact > 0 )? '<span class="badge marginleftonlyshort">'.$nbContact.'</span>' : '';
 		$head[$h][2] = 'contact';
 		$h++;
 	}

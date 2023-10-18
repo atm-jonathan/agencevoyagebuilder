@@ -128,7 +128,8 @@ class Formule extends CommonObject
 		'tarif' => array('type'=>'price', 'label'=>'tarif', 'enabled'=>'1', 'position'=>3, 'notnull'=>1, 'visible'=>1, 'searchall'=>1,),
 		'fk_country' => array('type'=>'integer:Ccountry:core/class/ccountry.class.php', 'label'=>'Pays', 'enabled'=>'1', 'position'=>4, 'notnull'=>1, 'visible'=>1,),
         'entity' => array('type'=>'integer', 'label'=>'Entity', 'enabled'=>1, 'visible'=>0, 'notnull'=> 1, 'default'=>0, 'index'=>1, 'position'=>20),
-        'import_key' =>array('type'=>'varchar(14)', 'label'=>'ImportId', 'enabled'=>1, 'visible'=>-2, 'position'=>900)
+        'import_key' =>array('type'=>'varchar(14)', 'label'=>'ImportId', 'enabled'=>1, 'visible'=>-2, 'position'=>900),
+        'fk_soc' =>array('type'=>'integer:Societe:societe/class/societe.class.php', 'label'=>'ThirdParty', 'enabled'=>'isModEnabled("societe")', 'visible'=>-1, 'position'=>23)
 	);
 
     public $rowid;
@@ -147,6 +148,7 @@ class Formule extends CommonObject
 	public $tarif;
 	public $fk_country;
     public $import_key;
+    public $fk_soc;
 
 	// END MODULEBUILDER PROPERTIES
 
