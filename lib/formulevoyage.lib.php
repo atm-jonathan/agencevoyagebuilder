@@ -84,7 +84,7 @@ function formulevoyageAdminPrepareHead()
  * @param int $id_country
  * @return mixed
  */
-function checkTarifPays($id_country) {
+function checkTarifPays(int $id_country) {
     global $db;
     $sql = "SELECT tarif FROM ";
     $sql .= MAIN_DB_PREFIX . "country_tarif ";
@@ -99,7 +99,7 @@ function checkTarifPays($id_country) {
  * @param int|string  $tarif
  * @return bool|resource
  */
-function updateTarifCountry($id_country, $tarif) {
+function updateTarifCountry(int $id_country, mixed $tarif) {
     global $db;
     $sql = "UPDATE " . MAIN_DB_PREFIX . "country_tarif SET tarif =" . $tarif;
     $sql .= " WHERE fk_country =" . $id_country;
@@ -112,7 +112,7 @@ function updateTarifCountry($id_country, $tarif) {
  * @param int|string $tarif
  * @return bool|resource
  */
-function insertTarifCountry($id_country, $tarif) {
+function insertTarifCountry(int $id_country, mixed $tarif) {
     global $db;
     $sql = "INSERT INTO ".MAIN_DB_PREFIX ;
     $sql .= "country_tarif (`fk_country`, `tarif`)";
@@ -125,7 +125,7 @@ function insertTarifCountry($id_country, $tarif) {
  * @param int|string $id_country
  * @return bool|resource
  */
-function deleteTarifCountry($id_country) {
+function deleteTarifCountry(int $id_country) {
     global $db;
     $sql = "DELETE FROM ".MAIN_DB_PREFIX ;
     $sql .= "country_tarif WHERE rowid = ".$id_country;
