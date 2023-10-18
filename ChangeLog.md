@@ -3,6 +3,9 @@
 ## UNRELEASED
 
 ## Version 1.8.0
+- NEW : Mail formule de voyage - *1.9.0* - **18/10/2023**
+
+## Version 1.8.0
 - NEW : Onglet contact formule de voyage - *1.8.0* - **18/10/2023**
 
 ## Version 1.7.0

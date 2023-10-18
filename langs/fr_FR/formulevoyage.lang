@@ -81,3 +81,10 @@ DocModelAzurformuledevoyageDescription = 	Un modèle de proposition complet (ave
 # import export
 #
 FormuleLines = Les formules
+
+#
+# Modèle de mail
+#
+SendingEmailOnFormule = EMAIL FORMULE
+TopicFormule = Votre formule voyage
+formuleContent = Voici votre formule de voyage :

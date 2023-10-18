@@ -369,5 +369,9 @@ class ActionsFormulevoyage
         }
     }
 
+    public function getFormMail($parameters, $object) {
+        var_dump($object->param );
+    }
+
 	/* Add here any other hooked methods... */
 }

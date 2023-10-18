@@ -1,0 +1,1 @@
+INSERT INTO llx_c_email_templates (entity, module, type_template, label, lang, position, topic, joinfiles, content) VALUES (1, '', 'all', '(SendingEmailOnFormule)', '', 100, '[__[MAIN_INFO_SOCIETE_NOM]__] - __(TopicFormule)__', 0, '\n __(Hello)__,\n__(formuleContent)__\n\n\n\n\n           __(Sincerely)__ \n            __[MAIN_INFO_SOCIETE_NOM]__ \n ');
