@@ -86,15 +86,12 @@ function formulevoyageAdminPrepareHead()
  */
 function checkTarifPays($id_country) {
     global $db;
-    $tReq = array();
     $sql = "SELECT tarif FROM ";
     $sql .= MAIN_DB_PREFIX . "country_tarif ";
     $sql .= "WHERE fk_country = " . $id_country;
     $resql = $db->query($sql);
-    while ($tArr = $db->fetch_array($resql)){
-        $tReq[] = $tArr;
-    }
-    return  $tReq[0][0];
+    $obj = $db->fetch_object($resql);
+    return ($obj instanceof stdClass) ? $obj->tarif : 0;
 }
 
 /**
