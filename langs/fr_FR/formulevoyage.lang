@@ -72,5 +72,22 @@ notewidgetform = Mes 5 dernières formules de voyages
 labelwidgetform = Mes 5 dernières formules de voyages
 Datec = Date création
 validated = Validé
+tarifdefaut = Tarif par défaut par pays
+tarifdefauthelp = Tarif par défaut par pays sélectionné si aucun défini
+tarifpays = Tarif pays
 formule = Formule voyage
 propal = Proposition commerciale
+
+#
+# formulaires
+#
+
+noTarifCountry = Pas de tarif atribué à ce pays, celui par défault est appliqué
+noCountrySelect = Aucun pays selectionné, le tarif par défault à été appliqué
+submitTarif = Enregistrer
+tarifCountryUpdate = Le tarif du pays a été mis à jour
+tarifCountryInsert = Le tarif du pays a été enregistrer
+errorNum = Saisir valeur numérique
+tarifExist = Ce tarif est déja renseigné
+labelInputPays = Pays :
+labelInputTarif = Tarif :

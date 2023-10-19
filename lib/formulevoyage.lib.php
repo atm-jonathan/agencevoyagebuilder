@@ -54,6 +54,10 @@ function formulevoyageAdminPrepareHead()
 	$head[$h][2] = 'formule_extrafields';
 	$h++;
 	*/
+    $head[$h][0] = dol_buildpath("/formulevoyage/admin/tarifpays.php", 1);
+    $head[$h][1] = $langs->trans("tarifpays");
+    $head[$h][2] = 'tarifpays';
+    $h++;
 
 	$head[$h][0] = dol_buildpath("/formulevoyage/admin/about.php", 1);
 	$head[$h][1] = $langs->trans("About");
@@ -107,5 +111,57 @@ function deleteObjectLiee ($object, $elementType, $trigger = false){
         }
     }
     return $Tresult;
+
+/**
+ * @param int $id_country
+ * @return mixed
+ */
+function checkTarifPays(int $id_country) {
+    global $db;
+    $sql = "SELECT tarif FROM ";
+    $sql .= MAIN_DB_PREFIX . "country_tarif ";
+    $sql .= "WHERE fk_country = " . $id_country;
+    $resql = $db->query($sql);
+    $obj = $db->fetch_object($resql);
+    return ($obj instanceof stdClass) ? $obj->tarif : 0;
+}
+
+/**
+ * @param int|string $id_country
+ * @param int|string  $tarif
+ * @return bool|resource
+ */
+function updateTarifCountry(int $id_country, string $tarif) {
+    global $db;
+    $sql = "UPDATE " . MAIN_DB_PREFIX . "country_tarif SET tarif =" . $tarif;
+    $sql .= " WHERE fk_country =" . $id_country;
+    $resql = $db->query($sql);
+    return $resql;
+}
+
+/**
+ * @param int $id_country
+ * @param string $tarif
+ * @return bool|resource
+ */
+function insertTarifCountry(int $id_country, string $tarif) {
+    global $db;
+    $sql = "INSERT INTO ".MAIN_DB_PREFIX ;
+    $sql .= "country_tarif (`fk_country`, `tarif`)";
+    $sql .= "VALUES ($id_country, $tarif)";
+    $resql = $db->query($sql);
+    return $resql;
+}
+
+/**
+ * @param int|string $id_country
+ * @return bool|resource
+ */
+function deleteTarifCountry(int $id_country) {
+    global $db;
+    $sql = "DELETE FROM ".MAIN_DB_PREFIX ;
+    $sql .= "country_tarif WHERE rowid = ".$id_country;
+    $resql = $db->query($sql);
+    return $resql;
 }
 
