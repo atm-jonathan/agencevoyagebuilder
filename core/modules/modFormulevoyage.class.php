@@ -72,7 +72,7 @@ class modFormulevoyage extends DolibarrModules
 		$this->editor_url = '';
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.6.0';
+		$this->version = '1.8.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
@@ -96,7 +96,7 @@ class modFormulevoyage extends DolibarrModules
 			// Set this to 1 if module has its own menus handler directory (core/menus)
 			'menus' => 0,
 			// Set this to 1 if module overwrite template dir (core/tpl)
-			'tpl' => 0,
+			'tpl' => 1,
 			// Set this to 1 if module has its own barcode directory (core/modules/barcode)
 			'barcode' => 0,
 			// Set this to 1 if module has its own models directory (core/modules/xxx)
@@ -497,8 +497,10 @@ class modFormulevoyage extends DolibarrModules
 
 		// Create extrafields during init
 		//include_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
-		//$extrafields = new ExtraFields($this->db);
-		//$result1=$extrafields->addExtraField('formulevoyage_myattr1', "New Attr 1 label", 'boolean', 1,  3, 'thirdparty',   0, 0, '', '', 1, '', 0, 0, '', '', 'formulevoyage@formulevoyage', 'isModEnabled("formulevoyage")');
+
+		$extrafields = new ExtraFields($this->db);
+       		$result1 = $extrafields->addExtraField('mentionspecifique', "Mention spécifique", 'varchar', 1,  255, 'propal',   0, 0, '', '', 1, '', 1, 0, '', '', 'formulevoyage@formulevoyage', '$conf->formulevoyage->enabled');
+		$result2 = $extrafields->addExtraField('listuser', "Responsable", 'link', 1,  3, 'propaldet',   0, 0, '', array('options'=>array('User:user/class/user.class.php' => null)), 1, '', 1, 0, '', '', 'formulevoyage@formulevoyage', '$conf->formulevoyage->enabled');
 		//$result2=$extrafields->addExtraField('formulevoyage_myattr2', "New Attr 2 label", 'varchar', 1, 10, 'project',      0, 0, '', '', 1, '', 0, 0, '', '', 'formulevoyage@formulevoyage', 'isModEnabled("formulevoyage")');
 		//$result3=$extrafields->addExtraField('formulevoyage_myattr3', "New Attr 3 label", 'varchar', 1, 10, 'bank_account', 0, 0, '', '', 1, '', 0, 0, '', '', 'formulevoyage@formulevoyage', 'isModEnabled("formulevoyage")');
 		//$result4=$extrafields->addExtraField('formulevoyage_myattr4', "New Attr 4 label", 'select',  1,  3, 'thirdparty',   0, 1, '', array('options'=>array('code1'=>'Val1','code2'=>'Val2','code3'=>'Val3')), 1,'', 0, 0, '', '', 'formulevoyage@formulevoyage', 'isModEnabled("formulevoyage")');

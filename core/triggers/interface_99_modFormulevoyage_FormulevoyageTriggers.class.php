@@ -316,7 +316,7 @@ class InterfaceFormulevoyageTriggers extends DolibarrTriggers
 
             // formule
             case  'FORMULE_DELETE' :
-                deleteObjectLiee($object, Propal::class, 1);
+                deleteObjectLiee($object, Propal::class, true);
                 break;
 
 			// and more...

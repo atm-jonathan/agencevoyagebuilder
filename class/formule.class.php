@@ -146,7 +146,7 @@ class Formule extends CommonObject
 	public $date_dep;
 	public $tarif;
 	public $fk_country;
-    public $import_key;
+    	public $import_key;
 
 	// END MODULEBUILDER PROPERTIES
 
