@@ -111,7 +111,7 @@ class modFormulevoyage extends DolibarrModules
 			),
 			// Set this to relative path of js file if module must load a js on all pages
 			'js' => array(
-//				'/formulevoyage/js/formulevoyage.js.php',
+                //  '/formulevoyage/js/formulevoyage.js.php',
 			),
 			// Set here all hooks context managed by module. To find available hook context, make a "grep -r '>initHooks(' *" on source code. You can also set hook context to 'all'
 			'hooks' => array(
@@ -255,14 +255,13 @@ class modFormulevoyage extends DolibarrModules
 
 		// Boxes/Widgets
 		// Add here list of php file(s) stored in formulevoyage/core/boxes that contains a class to show a widget.
-		$this->boxes = array(
-			//  0 => array(
-			//      'file' => 'formulevoyagewidget1.php@formulevoyage',
-			//      'note' => 'Widget provided by Formulevoyage',
-			//      'enabledbydefaulton' => 'Home',
-			//  ),
-			//  ...
-		);
+        $this->boxes = array(
+              0 => array(
+                  'file' => 'box_last_formule.php@formulevoyage',
+                  'note' => 'Widget provided by formulevoyage',
+                  'enabledbydefaulton' => 'Home',
+              ),
+        );
 
 		// Cronjobs (List of cron jobs entries to add when module is enabled)
 		// unit_frequency must be 60 for minute, 3600 for hour, 86400 for day, 604800 for week

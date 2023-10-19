@@ -47,6 +47,7 @@ modetransport = Mode de transport
 lireFormuleVoyage = Lire formule de voyage
 updateFormuleVoyage = Créer et mettre à jour formule de voyage
 deleteFormuleVoyage = Supprimer Formule de voyage
+boxeTarif = Tarif
 
 
 #
@@ -60,9 +61,14 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
-Readformulevoyage = Lire formule de voyage
-CreateUpdateformulevoyage = Créer / modifier formule de voyage
-Deleteformulevoyage = Supprimer formule de voyage
+messageLengthInput = Description de la formule trop courte, 5 caractère minimum
+Readformulevoyage = Voir les formules de voyage
+CreateUpdateformulevoyage = Créer / modifier des formules de voyage
+Deleteformulevoyage = Supprimer des formules de voyage
+notewidgetform = Mes 5 dernières formules de voyages
+labelwidgetform = Mes 5 dernières formules de voyages
+Datec = Date création
+validated = Validé
 tarifdefaut = Tarif par défaut par pays
 tarifdefauthelp = Tarif par défaut par pays sélectionné si aucun défini
 tarifpays = Tarif pays
