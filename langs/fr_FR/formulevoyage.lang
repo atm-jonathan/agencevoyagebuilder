@@ -91,3 +91,8 @@ errorNum = Saisir valeur numérique
 tarifExist = Ce tarif est déja renseigné
 labelInputPays = Pays :
 labelInputTarif = Tarif :
+
+#
+# model pdf
+#
+DocModelAzurformuledevoyageDescription = 	Un modèle de proposition complet (avec mention complémentaire formule de voyage)
