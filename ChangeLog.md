@@ -2,18 +2,21 @@
 
 ## UNRELEASED
 
-## Version 1.8.0
-- NEW : Onglet contact formule de voyage - *1.8.0* - **18/10/2023**
+## Version 1.9.0
+- NEW : Onglet contact formule de voyage - *1.9.0* - **17/10/2023**
 
-## Version 1.7.0
-- NEW : Gestion de l'import export - *1.7.0* - **17/10/2023**
+## Version 1.8.0
+- NEW : Gestion de l'import export - *1.8.0* - **17/10/2023**
 - NEW : End point API - *1.7.0* - **16/10/2023**
 
+## Version 1.7.0
+- NEW : Ajout d'extrafields  - *1.7.0* - **16/10/2023**
+
 ## Version 1.6.0
-- NEW : Ajout d'extrafields  - *1.6.0* - **16/10/2023**
+- NEW : Model PDF azur - *1.6.0* - **16/10/2023**
 
 ## Version 1.5.0
-- NEW : Link formule de voyage et propal  - *1.4.0* - **13/10/2023**
+- NEW : Link propal formule - *1.5.0* - **13/10/2023**
 
 ## Version 1.4.0
 - NEW : Tarif par défaut par pays  - *1.4.0* - **12/10/2023**

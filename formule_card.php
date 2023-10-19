@@ -78,6 +78,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formprojet.class.php';
 require __DIR__ .'/class/formule.class.php';
 require __DIR__ .'/lib/formulevoyage_formule.lib.php';
+require __DIR__ .'/lib/formulevoyage.lib.php';
 
 // Load translation files required by the page
 $langs->loadLangs(array("formulevoyage@formulevoyage", "other"));
@@ -164,7 +165,7 @@ if (!$permissiontoread) {
  * Actions
  */
 
-$parameters = array();
+    $parameters = array();
 $reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action); // Note that $action and $object may have been modified by some hooks
 if ($reshook < 0) {
 	setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
@@ -220,6 +221,15 @@ if (empty($reshook)) {
 	include DOL_DOCUMENT_ROOT.'/core/actions_sendmails.inc.php';
 }
 
+if ($action == 'add') {
+    $tarif = GETPOST('tarif', 'int');
+    $tarif = price2num($tarif, 2);
+    $tarifDefaut = price2num(getDolGlobalString('tarifdefaut'), 2);
+    if ($tarif == $tarifDefaut) {
+        setEventMessage('noTarifCountry');
+    }
+}
+
 
 
 
@@ -236,22 +246,6 @@ $formproject = new FormProjets($db);
 $title = $langs->trans("Formule");
 $help_url = '';
 llxHeader('', $title, $help_url);
-
-// Example : Adding jquery code
-// print '<script type="text/javascript">
-// jQuery(document).ready(function() {
-// 	function init_myfunc()
-// 	{
-// 		jQuery("#myid").removeAttr(\'disabled\');
-// 		jQuery("#myid").attr(\'disabled\',\'disabled\');
-// 	}
-// 	init_myfunc();
-// 	jQuery("#mybutton").click(function() {
-// 		init_myfunc();
-// 	});
-// });
-// </script>';
-
 
 // Part to create
 if ($action == 'create') {
@@ -277,6 +271,7 @@ if ($action == 'create') {
 	if ($dol_openinpopup) {
 		print '<input type="hidden" name="dol_openinpopup" value="'.$dol_openinpopup.'">';
 	}
+
 
 	print dol_get_fiche_head(array(), '');
 
@@ -440,22 +435,6 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 				print dolGetButtonAction('', $langs->trans('ToClone'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.(!empty($object->socid)?'&socid='.$object->socid:'').'&action=clone&token='.newToken(), '', $permissiontoadd);
 			}
 
-			/*
-			if ($permissiontoadd) {
-				if ($object->status == $object::STATUS_ENABLED) {
-					print dolGetButtonAction('', $langs->trans('Disable'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=disable&token='.newToken(), '', $permissiontoadd);
-				} else {
-					print dolGetButtonAction('', $langs->trans('Enable'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=enable&token='.newToken(), '', $permissiontoadd);
-				}
-			}
-			if ($permissiontoadd) {
-				if ($object->status == $object::STATUS_VALIDATED) {
-					print dolGetButtonAction('', $langs->trans('Cancel'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=close&token='.newToken(), '', $permissiontoadd);
-				} else {
-					print dolGetButtonAction('', $langs->trans('Re-Open'), 'default', $_SERVER['PHP_SELF'].'?id='.$object->id.'&action=reopen&token='.newToken(), '', $permissiontoadd);
-				}
-			}
-			*/
 
 			// Delete
 			$params = array();
@@ -519,6 +498,35 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 
 	include DOL_DOCUMENT_ROOT.'/core/tpl/card_presend.tpl.php';
 }
+
+if (!empty($conf->use_javascript_ajax)) { ?>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#fk_country").on("select2:select", function (e) {
+                $.ajax({
+                    type: "POST",
+                    url: "scripts/input_tarif.php",
+                    data: {
+                        fk_country: $(this).val(),
+                        token: "<?php echo newToken()?>"
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        let tarif = document.getElementById('tarif');
+                        tarif.value = response.tarif;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erreur lors de la requête AJAX :", status, error);
+                    }
+                });
+            });
+        });
+
+    </script> <?php
+}
+
+
+
 
 // End of page
 llxFooter();
