@@ -1,0 +1,1 @@
+ALTER TABLE `llx_formulevoyage_formule` ADD `import_key`  varchar(14) NULL AFTER `fk_country`;

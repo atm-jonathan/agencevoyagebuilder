@@ -121,13 +121,14 @@ class Formule extends CommonObject
 		'tms' => array('type'=>'timestamp', 'label'=>'DateModification', 'enabled'=>'1', 'position'=>501, 'notnull'=>0, 'visible'=>-2,),
 		'fk_user_creat' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserAuthor', 'picto'=>'user', 'enabled'=>'1', 'position'=>510, 'notnull'=>1, 'visible'=>-2, 'foreignkey'=>'user.rowid', 'csslist'=>'tdoverflowmax150',),
 		'fk_user_modif' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserModif', 'picto'=>'user', 'enabled'=>'1', 'position'=>511, 'notnull'=>-1, 'visible'=>-2, 'csslist'=>'tdoverflowmax150',),
-        'status' => array('type'=>'smallint', 'label'=>'Status', 'enabled'=>'1', 'notnull'=>1, 'position'=>16, 'visible'=>5, 'default'=>0,'index'=>1, 'arrayofkeyval'=>array('0'=>'Draft', '1'=>'Validated'),),
+        'status' => array('type'=>'smallint', 'label'=>'Status', 'enabled'=>'1', 'notnull'=>0, 'position'=>16, 'visible'=>5, 'default'=>0,'index'=>1, 'arrayofkeyval'=>array('0'=>'Draft', '1'=>'Validated'),),
 		'fk_mode_transport' => array('type'=>'sellist:c_mode_transport:label:rowid::active=1', 'label'=>'Type de transport', 'enabled'=>'1', 'position'=>5, 'notnull'=>0, 'visible'=>1,),
 		'date_arr' => array('type'=>'datetime', 'label'=>'Date arrivée', 'enabled'=>'1', 'position'=>6, 'notnull'=>0, 'visible'=>1,),
 		'date_dep' => array('type'=>'datetime', 'label'=>'Date départ', 'enabled'=>'1', 'position'=>7, 'notnull'=>0, 'visible'=>1,),
-		'tarif' => array('type'=>'price', 'label'=>'tarif', 'enabled'=>'1', 'position'=>4, 'notnull'=>1, 'visible'=>1, 'searchall'=>1,),
-		'fk_country' => array('type'=>'integer:Ccountry:core/class/ccountry.class.php', 'label'=>'Pays', 'enabled'=>'1', 'position'=>3, 'notnull'=>1, 'visible'=>1,),
-        'entity' => array('type'=>'integer', 'label'=>'Entity', 'enabled'=>1, 'visible'=>0, 'notnull'=> 1, 'default'=>0, 'index'=>1, 'position'=>20)
+		'tarif' => array('type'=>'price', 'label'=>'tarif', 'enabled'=>'1', 'position'=>3, 'notnull'=>1, 'visible'=>1, 'searchall'=>1,),
+		'fk_country' => array('type'=>'integer:Ccountry:core/class/ccountry.class.php', 'label'=>'Pays', 'enabled'=>'1', 'position'=>4, 'notnull'=>1, 'visible'=>1,),
+        'entity' => array('type'=>'integer', 'label'=>'Entity', 'enabled'=>1, 'visible'=>0, 'notnull'=> 1, 'default'=>0, 'index'=>1, 'position'=>20),
+        'import_key' =>array('type'=>'varchar(14)', 'label'=>'ImportId', 'enabled'=>1, 'visible'=>-2, 'position'=>900)
 	);
 
     public $rowid;
@@ -145,6 +146,8 @@ class Formule extends CommonObject
 	public $date_dep;
 	public $tarif;
 	public $fk_country;
+    public $import_key;
+
 	// END MODULEBUILDER PROPERTIES
 
 

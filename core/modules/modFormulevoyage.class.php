@@ -72,7 +72,7 @@ class modFormulevoyage extends DolibarrModules
 		$this->editor_url = '';
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.7.0';
+		$this->version = '1.8.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
@@ -415,19 +415,19 @@ class modFormulevoyage extends DolibarrModules
 		// Exports profiles provided by this module
 		$r = 1;
 		/* BEGIN MODULEBUILDER EXPORT FORMULE */
-		/*
+
 		$langs->load("formulevoyage@formulevoyage");
 		$this->export_code[$r]=$this->rights_class.'_'.$r;
 		$this->export_label[$r]='FormuleLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
 		$this->export_icon[$r]='Formule@formulevoyage';
 		// Define $this->export_fields_array, $this->export_TypeFields_array and $this->export_entities_array
-		$keyforclass = 'Formule'; $keyforclassfile='/formulevoyage/class/Formule.class.php'; $keyforelement='Formule@formulevoyage';
+		$keyforclass = 'Formule'; $keyforclassfile='/formulevoyage/class/formule.class.php'; $keyforelement='formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/commonfieldsinexport.inc.php';
 		//$this->export_fields_array[$r]['t.fieldtoadd']='FieldToAdd'; $this->export_TypeFields_array[$r]['t.fieldtoadd']='Text';
 		//unset($this->export_fields_array[$r]['t.fieldtoremove']);
 		//$keyforclass = 'FormuleLine'; $keyforclassfile='/formulevoyage/class/Formule.class.php'; $keyforelement='Formuleline@formulevoyage'; $keyforalias='tl';
 		//include DOL_DOCUMENT_ROOT.'/core/commonfieldsinexport.inc.php';
-		$keyforselect='Formule'; $keyforaliasextra='extra'; $keyforelement='Formule@formulevoyage';
+		$keyforselect='Formule'; $keyforaliasextra='extra'; $keyforelement='formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/extrafieldsinexport.inc.php';
 		//$keyforselect='Formuleline'; $keyforaliasextra='extraline'; $keyforelement='Formuleline@formulevoyage';
 		//include DOL_DOCUMENT_ROOT.'/core/extrafieldsinexport.inc.php';
@@ -436,47 +436,44 @@ class modFormulevoyage extends DolibarrModules
 		//$this->export_examplevalues_array[$r] = array('t.field'=>'Example');
 		//$this->export_help_array[$r] = array('t.field'=>'FieldDescHelp');
 		$this->export_sql_start[$r]='SELECT DISTINCT ';
-		$this->export_sql_end[$r]  =' FROM '.MAIN_DB_PREFIX.'Formule as t';
+		$this->export_sql_end[$r]  =' FROM '.MAIN_DB_PREFIX.'formulevoyage_formule as t';
 		//$this->export_sql_end[$r]  =' LEFT JOIN '.MAIN_DB_PREFIX.'Formule_line as tl ON tl.fk_Formule = t.rowid';
 		$this->export_sql_end[$r] .=' WHERE 1 = 1';
-		$this->export_sql_end[$r] .=' AND t.entity IN ('.getEntity('Formule').')';
-		$r++; */
+		$this->export_sql_end[$r] .=' AND t.entity IN ('.getEntity('formulevoyage_formule').')';
+		$r++;
 		/* END MODULEBUILDER EXPORT FORMULE */
 
 		// Imports profiles provided by this module
 		$r = 1;
 		/* BEGIN MODULEBUILDER IMPORT FORMULE */
-		/*
+
 		$langs->load("formulevoyage@formulevoyage");
 		$this->import_code[$r]=$this->rights_class.'_'.$r;
 		$this->import_label[$r]='FormuleLines';	// Translation key (used only if key ExportDataset_xxx_z not found)
 		$this->import_icon[$r]='Formule@formulevoyage';
-		$this->import_tables_array[$r] = array('t' => MAIN_DB_PREFIX.'formulevoyage_Formule', 'extra' => MAIN_DB_PREFIX.'formulevoyage_Formule_extrafields');
-		$this->import_tables_creator_array[$r] = array('t' => 'fk_user_author'); // Fields to store import user id
+		$this->import_tables_array[$r] = array('t' => MAIN_DB_PREFIX.'formulevoyage_formule', 'extra' => MAIN_DB_PREFIX.'formulevoyage_formule_extrafields');
+		$this->import_tables_creator_array[$r] = array('t' => 'fk_user_creat'); // Fields to store import user id
 		$import_sample = array();
-		$keyforclass = 'Formule'; $keyforclassfile='/formulevoyage/class/Formule.class.php'; $keyforelement='Formule@formulevoyage';
+		$keyforclass = 'Formule'; $keyforclassfile='/formulevoyage/class/formule.class.php'; $keyforelement='formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/commonfieldsinimport.inc.php';
 		$import_extrafield_sample = array();
-		$keyforselect='Formule'; $keyforaliasextra='extra'; $keyforelement='Formule@formulevoyage';
+		$keyforselect='Formule'; $keyforaliasextra='extra'; $keyforelement='formule@formulevoyage';
 		include DOL_DOCUMENT_ROOT.'/core/extrafieldsinimport.inc.php';
-		$this->import_fieldshidden_array[$r] = array('extra.fk_object' => 'lastrowid-'.MAIN_DB_PREFIX.'formulevoyage_Formule');
+		$this->import_fieldshidden_array[$r] = array('extra.fk_object' => 'lastrowid-'.MAIN_DB_PREFIX.'formulevoyage_formule');
 		$this->import_regex_array[$r] = array();
 		$this->import_examplevalues_array[$r] = array_merge($import_sample, $import_extrafield_sample);
 		$this->import_updatekeys_array[$r] = array('t.ref' => 'Ref');
 		$this->import_convertvalue_array[$r] = array(
 			't.ref' => array(
 				'rule'=>'getrefifauto',
-				'class'=>(!getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON') ? 'mod_Formule_standard' : getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')),
-				'path'=>"/core/modules/commande/".(!getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON') ? 'mod_Formule_standard' : getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')).'.php'
+				'class'=>(!getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON') ? 'mod_formule_standard' : getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')),
+				'path'=>"/core/modules/commande/".(!getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON') ? 'mod_formule_standard' : getDolGlobalString('FORMULEVOYAGE_FORMULE_ADDON')).'.php',
 				'classobject'=>'Formule',
-				'pathobject'=>'/formulevoyage/class/Formule.class.php',
-			),
-			't.fk_soc' => array('rule' => 'fetchidfromref', 'file' => '/societe/class/societe.class.php', 'class' => 'Societe', 'method' => 'fetch', 'element' => 'ThirdParty'),
-			't.fk_user_valid' => array('rule' => 'fetchidfromref', 'file' => '/user/class/user.class.php', 'class' => 'User', 'method' => 'fetch', 'element' => 'user'),
-			't.fk_mode_reglement' => array('rule' => 'fetchidfromcodeorlabel', 'file' => '/compta/paiement/class/cpaiement.class.php', 'class' => 'Cpaiement', 'method' => 'fetch', 'element' => 'cpayment'),
+				'pathobject'=>'/formulevoyage/class/formule.class.php',
+			)
 		);
 		$this->import_run_sql_after_array[$r] = array();
-		$r++; */
+		$r++;
 		/* END MODULEBUILDER IMPORT FORMULE */
 	}
 

@@ -2,6 +2,10 @@
 
 ## UNRELEASED
 
+## Version 1.8.0
+- NEW : Gestion de l'import export - *1.7.0* - **16/10/2023**
+- NEW : End point API - *1.7.0* - **16/10/2023**
+
 ## Version 1.7.0
 - NEW : Ajout d'extrafields  - *1.7.0* - **16/10/2023**
 
