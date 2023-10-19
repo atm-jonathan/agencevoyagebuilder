@@ -80,27 +80,30 @@ function formulevoyageAdminPrepareHead()
 }
 
 /**
- * @param Object $object
- * @param String $elementType
- * @return array $Tresult   array element delete
+ * @param   Object  $object
+ * @param   String  $elementType
+ * @param   bool    $trigger
+ * @return  array   $Tresult   array element delete
  */
-function deleteObjectLiee ($object, $elementType, $trigger = false){
+function deleteObjectLiee (CommonObject $object, string $elementType, bool $trigger = false) {
     global $langs, $user;
     $Tresult = array();
     $object->fetchObjectLinked();
-    if (!empty($object->linkedObjects)){
-        foreach ($object->linkedObjects as $TobjLink){
-            foreach ($TobjLink as $key => $objLiee){
+    if (! empty($object->linkedObjects)) {
+        foreach ($object->linkedObjects as $TobjLink) {
+            foreach ($TobjLink as $key => $objLiee) {
                 if ($objLiee->element == strtolower(Propal::class) &&
-                    $objLiee->status == Propal::STATUS_SIGNED){
-                       setEventMessage($langs->trans('msgDeleteLinkPropal', $objLiee->element, $objLiee->ref), 'warnings');
-                        $object->element = $object->table_element;
-                        $object->deleteObjectLinked($objLiee->id, $objLiee->element);
-                        $object->element = strtolower(get_class($object));
-                        $objLiee->deleteObjectLinked($object->id, $object->element);
-                        break;
-                }else{
-                    if ($objLiee->element == strtolower($elementType)  ){
+                    $objLiee->status == Propal::STATUS_SIGNED) {
+                    $object->element = $object->table_element;
+                    $linkObjLiee = $object->deleteObjectLinked($objLiee->id, $objLiee->element);
+                    $object->element = strtolower(get_class($object));
+                    $linkObj = $objLiee->deleteObjectLinked($object->id, $object->element);
+                    if ($linkObj > 0 && $linkObjLiee > 0){
+                        setEventMessage($langs->trans('msgDeleteLinkPropal', $objLiee->element, $objLiee->ref), 'warnings');
+                    }
+                    break;
+                } else {
+                    if ($objLiee->element == strtolower($elementType)) {
                         $Tresult[$key]['objectLiee'] = $objLiee->id;
                         $res = $objLiee->delete($user, $trigger);
                         $Tresult[$key]['typeObject'] = strtolower($elementType);
@@ -111,6 +114,7 @@ function deleteObjectLiee ($object, $elementType, $trigger = false){
         }
     }
     return $Tresult;
+}
 
 /**
  * @param int $id_country
