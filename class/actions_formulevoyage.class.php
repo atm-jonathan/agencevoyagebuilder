@@ -99,23 +99,7 @@ class ActionsFormulevoyage
 	 */
 	public function doActions($parameters, &$object, &$action, $hookmanager)
 	{
-		global $conf, $user, $langs;
 
-		$error = 0; // Error counter
-		/* print_r($parameters); print_r($object); echo "action: " . $action; */
-		if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {	    // do something only for the context 'somecontext1' or 'somecontext2'
-			// Do what you want here...
-			// You can for example call global vars like $fieldstosearchall to overwrite them, or update database depending on $action and $_POST values.
-		}
-
-		if (!$error) {
-			$this->results = array('myreturn' => 999);
-			$this->resprints = 'A text to show';
-			return 0; // or return 1 to replace standard code
-		} else {
-			$this->errors[] = 'Error message';
-			return -1;
-		}
 	}
 
 
@@ -130,25 +114,7 @@ class ActionsFormulevoyage
 	 */
 	public function doMassActions($parameters, &$object, &$action, $hookmanager)
 	{
-		global $conf, $user, $langs;
 
-		$error = 0; // Error counter
-
-		/* print_r($parameters); print_r($object); echo "action: " . $action; */
-		if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {		// do something only for the context 'somecontext1' or 'somecontext2'
-			foreach ($parameters['toselect'] as $objectid) {
-				// Do action on each object id
-			}
-		}
-
-		if (!$error) {
-			$this->results = array('myreturn' => 999);
-			$this->resprints = 'A text to show';
-			return 0; // or return 1 to replace standard code
-		} else {
-			$this->errors[] = 'Error message';
-			return -1;
-		}
 	}
 
 
@@ -163,22 +129,7 @@ class ActionsFormulevoyage
 	 */
 	public function addMoreMassActions($parameters, &$object, &$action, $hookmanager)
 	{
-		global $conf, $user, $langs;
 
-		$error = 0; // Error counter
-		$disabled = 1;
-
-		/* print_r($parameters); print_r($object); echo "action: " . $action; */
-		if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {		// do something only for the context 'somecontext1' or 'somecontext2'
-			$this->resprints = '<option value="0"'.($disabled ? ' disabled="disabled"' : '').'>'.$langs->trans("FormulevoyageMassAction").'</option>';
-		}
-
-		if (!$error) {
-			return 0; // or return 1 to replace standard code
-		} else {
-			$this->errors[] = 'Error message';
-			return -1;
-		}
 	}
 
 
@@ -195,19 +146,7 @@ class ActionsFormulevoyage
 	 */
 	public function beforePDFCreation($parameters, &$object, &$action)
 	{
-		global $conf, $user, $langs;
-		global $hookmanager;
 
-		$outputlangs = $langs;
-
-		$ret = 0; $deltemp = array();
-		dol_syslog(get_class($this).'::executeHooks action='.$action);
-
-		/* print_r($parameters); print_r($object); echo "action: " . $action; */
-		if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {		// do something only for the context 'somecontext1' or 'somecontext2'
-		}
-
-		return $ret;
 	}
 
 	/**
@@ -222,20 +161,7 @@ class ActionsFormulevoyage
 	 */
 	public function afterPDFCreation($parameters, &$pdfhandler, &$action)
 	{
-		global $conf, $user, $langs;
-		global $hookmanager;
 
-		$outputlangs = $langs;
-
-		$ret = 0; $deltemp = array();
-		dol_syslog(get_class($this).'::executeHooks action='.$action);
-
-		/* print_r($parameters); print_r($object); echo "action: " . $action; */
-		if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {
-			// do something only for the context 'somecontext1' or 'somecontext2'
-		}
-
-		return $ret;
 	}
 
 
@@ -362,10 +288,12 @@ class ActionsFormulevoyage
 	}
 
     public function addMoreActionsButtons($parameters, $object, $action) {
+
+        global $langs;
         $context = explode(':', $parameters['context']);
         $url = dol_buildpath('formulevoyage/formule_card.php', 2);
         if (in_array('propalcard',  $context)){
-            print '<a class="butAction" href="'.$url.'?action=create&id_propal='.$object->id.'">Créer une formule de voyage</a>';
+            print '<a class="butAction" href="'.$url.'?action=create&id_propal='.$object->id.'">'.$langs->trans('btnCreateForm').'</a>';
         }
     }
 
