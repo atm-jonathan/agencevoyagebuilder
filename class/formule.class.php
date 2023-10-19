@@ -125,8 +125,8 @@ class Formule extends CommonObject
 		'fk_mode_transport' => array('type'=>'sellist:c_mode_transport:label:rowid::active=1', 'label'=>'Type de transport', 'enabled'=>'1', 'position'=>5, 'notnull'=>0, 'visible'=>1,),
 		'date_arr' => array('type'=>'datetime', 'label'=>'Date arrivée', 'enabled'=>'1', 'position'=>6, 'notnull'=>0, 'visible'=>1,),
 		'date_dep' => array('type'=>'datetime', 'label'=>'Date départ', 'enabled'=>'1', 'position'=>7, 'notnull'=>0, 'visible'=>1,),
-		'tarif' => array('type'=>'price', 'label'=>'tarif', 'enabled'=>'1', 'position'=>3, 'notnull'=>1, 'visible'=>1, 'searchall'=>1,),
-		'fk_country' => array('type'=>'integer:Ccountry:core/class/ccountry.class.php', 'label'=>'Pays', 'enabled'=>'1', 'position'=>4, 'notnull'=>1, 'visible'=>1,),
+		'tarif' => array('type'=>'price', 'label'=>'tarif', 'enabled'=>'1', 'position'=>4, 'notnull'=>1, 'visible'=>1, 'searchall'=>1,),
+		'fk_country' => array('type'=>'integer:Ccountry:core/class/ccountry.class.php', 'label'=>'Pays', 'enabled'=>'1', 'position'=>3, 'notnull'=>1, 'visible'=>1,),
         'entity' => array('type'=>'integer', 'label'=>'Entity', 'enabled'=>1, 'visible'=>0, 'notnull'=> 1, 'default'=>0, 'index'=>1, 'position'=>20)
 	);
 

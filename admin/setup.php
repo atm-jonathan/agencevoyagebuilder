@@ -129,7 +129,7 @@ $formSetup = new FormSetup($db);
 //$formSetup->newItem('Title')->setAsTitle();
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM8
-//$item = $formSetup->newItem('FORMULEVOYAGE_MYPARAM8');
+//$item = $formSetup->newItem('tarifdefaut');
 //$TField = array(
 //	'test01' => $langs->trans('test01'),
 //	'test02' => $langs->trans('test02'),
@@ -139,11 +139,13 @@ $formSetup = new FormSetup($db);
 //	'test06' => $langs->trans('test06'),
 //);
 //$item->setAsMultiSelect($TField);
-//$item->helpText = $langs->transnoentities('FORMULEVOYAGE_MYPARAM8');
 //
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM9
-//$formSetup->newItem('FORMULEVOYAGE_MYPARAM9')->setAsSelect($TField);
+$item = $formSetup->newItem('tarifdefaut');
+$item->fieldAttr['type'] = 'number';
+$item->fieldAttr['step'] = '0.01';
+$item->helpText = $langs->transnoentities('tarifdefauthelp');
 //
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM10
@@ -165,10 +167,16 @@ $setupnotempty += count($formSetup->items);
 
 $dirmodels = array_merge(array('/'), (array) $conf->modules_parts['models']);
 
-
 /*
  * Actions
  */
+$tarifDefaut = GETPOST('tarifdefaut', 'za09');
+
+if (!empty($tarifDefaut) && !is_numeric($tarifDefaut)){
+    setEventMessage('errorNum');
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit;
+}
 
 // For retrocompatibility Dolibarr < 15.0
 if ( versioncompare(explode('.', DOL_VERSION), array(15)) < 0 && $action == 'update' && !empty($user->admin)) {
