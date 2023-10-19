@@ -2,6 +2,9 @@
 
 ## UNRELEASED
 
+## Version 1.7.0
+- NEW : Ajout d'extrafields  - *1.7.0* - **16/10/2023**
+
 ## Version 1.6.0
 - NEW : Model PDF azur - *1.6.0* - **16/10/2023**
 
