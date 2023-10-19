@@ -48,6 +48,9 @@ lireFormuleVoyage = Lire formule de voyage
 updateFormuleVoyage = Créer et mettre à jour formule de voyage
 deleteFormuleVoyage = Supprimer Formule de voyage
 boxeTarif = Tarif
+btnCreateForm = Créer une formule de voyage
+msgDeleteLinkPropal = L'élément est signé %s est validé suppression %s impossible
+
 
 
 #
@@ -72,6 +75,8 @@ validated = Validé
 tarifdefaut = Tarif par défaut par pays
 tarifdefauthelp = Tarif par défaut par pays sélectionné si aucun défini
 tarifpays = Tarif pays
+formule = Formule voyage
+propal = Proposition commerciale
 
 #
 # formulaires

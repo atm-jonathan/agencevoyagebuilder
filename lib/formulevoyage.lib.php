@@ -59,13 +59,12 @@ function formulevoyageAdminPrepareHead()
     $head[$h][2] = 'tarifpays';
     $h++;
 
-    $head[$h][0] = dol_buildpath("/formulevoyage/admin/about.php", 1);
-    $head[$h][1] = $langs->trans("About");
-    $head[$h][2] = 'about';
-    $h++;
+	$head[$h][0] = dol_buildpath("/formulevoyage/admin/about.php", 1);
+	$head[$h][1] = $langs->trans("About");
+	$head[$h][2] = 'about';
+	$h++;
 
-
-    // Show more tabs from modules
+	// Show more tabs from modules
 	// Entries must be declared in modules descriptor with line
 	//$this->tabs = array(
 	//	'entity:+tabname:Title:@formulevoyage:/formulevoyage/mypage.php?id=__ID__'
@@ -78,6 +77,43 @@ function formulevoyageAdminPrepareHead()
 	complete_head_from_modules($conf, $langs, null, $head, $h, 'formulevoyage@formulevoyage', 'remove');
 
 	return $head;
+}
+
+/**
+ * @param   Object  $object
+ * @param   String  $elementType
+ * @param   bool    $trigger
+ * @return  array   $Tresult   array element delete
+ */
+function deleteObjectLiee (CommonObject $object, string $elementType, bool $trigger = false) {
+    global $langs, $user;
+    $Tresult = array();
+    $object->fetchObjectLinked();
+    if (! empty($object->linkedObjects)) {
+        foreach ($object->linkedObjects as $TobjLink) {
+            foreach ($TobjLink as $key => $objLiee) {
+                if ($objLiee->element == strtolower(Propal::class) &&
+                    $objLiee->status == Propal::STATUS_SIGNED) {
+                    $object->element = $object->table_element;
+                    $linkObjLiee = $object->deleteObjectLinked($objLiee->id, $objLiee->element);
+                    $object->element = strtolower(get_class($object));
+                    $linkObj = $objLiee->deleteObjectLinked($object->id, $object->element);
+                    if ($linkObj > 0 && $linkObjLiee > 0){
+                        setEventMessage($langs->trans('msgDeleteLinkPropal', $objLiee->element, $objLiee->ref), 'warnings');
+                    }
+                    break;
+                } else {
+                    if ($objLiee->element == strtolower($elementType)) {
+                        $Tresult[$key]['objectLiee'] = $objLiee->id;
+                        $res = $objLiee->delete($user, $trigger);
+                        $Tresult[$key]['typeObject'] = strtolower($elementType);
+                        $Tresult[$key]['res'] = $res;
+                    }
+                }
+            }
+        }
+    }
+    return $Tresult;
 }
 
 /**

@@ -236,14 +236,24 @@ class Formule extends CommonObject
 	 */
 	public function create(User $user, $notrigger = false)
 	{
+    global $db;
+    require_once DOL_DOCUMENT_ROOT . '/comm/propal/class/propal.class.php';
         $lengthOk = Formule::requireLenghtInput($this->description);
         if ($lengthOk){
             $resultcreate = $this->createCommon($user, $notrigger);
         }else{
             return 0;
         }
-		//$resultvalidate = $this->validate($user, $notrigger);
 
+        $id_propal = GETPOST('id_propal', 'aZ09');
+        if (!empty($id_propal)){
+            $propal = new Propal($db);
+            $res = $propal->fetch($id_propal);
+            if ($res){
+                $propal->add_object_linked($this->element, $this->id);
+                $this->add_object_linked($propal->element, $propal->id);
+            }
+        }
 		return $resultcreate;
 	}
 
@@ -481,7 +491,6 @@ class Formule extends CommonObject
 	public function delete(User $user, $notrigger = false)
 	{
 		return $this->deleteCommon($user, $notrigger);
-		//return $this->deleteCommon($user, $notrigger, 1);
 	}
 
 	/**

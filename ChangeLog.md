@@ -2,6 +2,9 @@
 
 ## UNRELEASED
 
+## Version 1.5.0
+- NEW : Link propal formule - *1.5.0* - **13/10/2023**
+
 ## Version 1.4.0
 - NEW : Tarif par défaut par pays  - *1.4.0* - **12/10/2023**
 
