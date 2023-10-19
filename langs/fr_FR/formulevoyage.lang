@@ -101,3 +101,13 @@ DocModelAzurformuledevoyageDescription = 	Un modèle de proposition complet (ave
 # import export
 #
 FormuleLines = Les formules
+
+
+#
+# email
+#
+formuleEmail = Formule
+formuleContent = Cher voyageur(euse),
+SendingEmailOnFormule = Mail formule
+
+formuleSend = formule_send

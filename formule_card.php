@@ -247,6 +247,11 @@ $title = $langs->trans("Formule");
 $help_url = '';
 llxHeader('', $title, $help_url);
 
+if ($action == 'presend' && !empty($object->liste_contact())){
+    var_dump(GETPOST('modelselected'));
+    $_POST['sendto'] = $object->liste_contact()[0]['email'];
+}
+
 // Part to create
 if ($action == 'create') {
 	if (empty($permissiontoadd)) {
