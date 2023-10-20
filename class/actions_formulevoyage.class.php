@@ -307,5 +307,9 @@ class ActionsFormulevoyage
         return 0;
     }
 
+    public function getDefaultFromEmail ( $parameters, $formmail) {
+
+    }
+
 	/* Add here any other hooked methods... */
 }
