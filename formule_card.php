@@ -248,10 +248,6 @@ $title = $langs->trans("Formule");
 $help_url = '';
 llxHeader('', $title, $help_url);
 
-if ($action == 'presend' && !empty($object->liste_contact())){
-    $withtoselected = $object->liste_contact()[0]['email'];
-}
-
 // Part to create
 if ($action == 'create') {
 	if (empty($permissiontoadd)) {
