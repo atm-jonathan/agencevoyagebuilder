@@ -146,6 +146,11 @@ $item = $formSetup->newItem('tarifdefaut');
 $item->fieldAttr['type'] = 'number';
 $item->fieldAttr['step'] = '0.01';
 $item->helpText = $langs->transnoentities('tarifdefauthelp');
+
+$item = $formSetup->newItem('semainecloture');
+$item->fieldAttr['type'] = 'number';
+$item->fieldAttr['step'] = '0.01';
+$item->helpText = $langs->transnoentities('semainecloturedefauthelp');
 //
 //
 //// Setup conf FORMULEVOYAGE_MYPARAM10

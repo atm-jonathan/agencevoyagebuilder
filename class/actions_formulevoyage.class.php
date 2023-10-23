@@ -99,6 +99,13 @@ class ActionsFormulevoyage
 	 */
 	public function doActions($parameters, &$object, &$action, $hookmanager)
 	{
+        global $user;
+        $context = explode(':', $parameters['context']);
+        if (!empty($object->fk_soc) && in_array('formulecard',  $context) && empty($object->liste_contact())){
+            $object->fk_soc = null;
+            $object->update($user);
+        }
+
 
 	}
 
