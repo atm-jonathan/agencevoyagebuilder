@@ -89,7 +89,6 @@ $ref = GETPOST('ref', 'alpha');
 $lineid   = GETPOST('lineid', 'int');
 $id_propal   = GETPOST('id_propal', 'int');
 $action = GETPOST('action', 'aZ09');
-//$withtoselected = GETPOST("receiver", 'array');
 $confirm = GETPOST('confirm', 'alpha');
 $cancel = GETPOST('cancel', 'aZ09');
 $contextpage = GETPOST('contextpage', 'aZ') ? GETPOST('contextpage', 'aZ') : str_replace('_', '', basename(dirname(__FILE__)).basename(__FILE__, '.php')); // To manage different context of search

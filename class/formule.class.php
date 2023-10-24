@@ -1102,35 +1102,6 @@ class Formule extends CommonObject
     }
 
     /**
-     * Action executed by scheduler
-     * CAN BE A CRON TASK. In such a case, parameters come from the schedule job setup field 'Parameters'
-     * Use public function doScheduledJob($param1, $param2, ...) to get parameters
-     *
-     * @return    int            0 if OK, <>0 if KO (this function is used also by cron so only 0 is OK)
-     */
-    public function doScheduledJob() {
-        //global $conf, $langs;
-
-        //$conf->global->SYSLOG_FILE = 'DOL_DATA_ROOT/dolibarr_mydedicatedlofile.log';
-
-        $error = 0;
-        $this->output = '';
-        $this->error = '';
-
-        dol_syslog(__METHOD__, LOG_DEBUG);
-
-        $now = dol_now();
-
-        $this->db->begin();
-
-        // ...
-
-        $this->db->commit();
-
-        return $error;
-    }
-
-    /**
      * Send a message and stop
      * @param string $input
      * @return int  1 if OK, 0 if KO
@@ -1145,10 +1116,13 @@ class Formule extends CommonObject
         }
     }
 
+    /**
+     * @return int
+     */
     public function formuleCloture() {
         global $user;
         $Tformules = $this->fetchAll();
-        if (!empty($Tformules)) {
+        if (count($Tformules) > 0) {
             $nbWeek = getDolGlobalInt('semainecloture');
             $dateLimite = new DateTime("-{$nbWeek} weeks");
             foreach ($Tformules as $obj) {
@@ -1157,7 +1131,10 @@ class Formule extends CommonObject
                 $dateCreation->format('Y-m-d');
                 $difference = $dateCreation->diff($dateLimite);
                 if ($difference->days > $nbWeek * 7) {
-                    $obj->delete($user);
+                    $ret = $obj->delete($user);
+                    if ($ret < 0){
+                        return 1;
+                    }
                 }
             }
         }
