@@ -268,13 +268,13 @@ class modFormulevoyage extends DolibarrModules
 		// unit_frequency must be 60 for minute, 3600 for hour, 86400 for day, 604800 for week
 		$this->cronjobs = array(
 			  0 => array(
-			      'label' => $langs->trans('cronformule'),
+			      'label' => $langs->trans('cronFormule'),
 			      'jobtype' => 'method',
 			      'class' => '/formulevoyage/class/formule.class.php',
 			      'objectname' => 'Formule',
 			      'method' => 'formuleCloture',
 			      'parameters' => '',
-			      'comment' => $langs->trans('cronformulecomment'),
+			      'comment' => $langs->trans('cronFormuleComment'),
 			      'frequency' => 24,
 			      'unitfrequency' => '',
 			      'status' => 1,

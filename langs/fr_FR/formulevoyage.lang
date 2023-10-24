@@ -78,7 +78,7 @@ tarifpays = Tarif pays
 formule = Formule voyage
 propal = Proposition commerciale
 semainecloture = Nombre de semaine limite cloturation
-semainecloturedefauthelp = Saisir le nombre de semaines de cloturation automatique
+semaineClotureDefautHelp = Saisir le nombre de semaines de cloturation automatique
 
 #
 # formulaires
@@ -115,5 +115,6 @@ formuleSend = formule_send
 
 #
 # cron
-cronformule = Supprimer les formules de voyage ancienne
-cronformulecomment = Suppression des formules selon le nombre de semaine configurés
+cronFormule = Supprimer les formules de voyage ancienne
+cronFormuleComment = Suppression des formules selon le nombre de semaine configurés
+configNbWeek = Veuillez configurer un nombre de semaine dans les paramètres du module

@@ -1119,11 +1119,15 @@ class Formule extends CommonObject
     /**
      * @return int
      */
-    public function formuleCloture() {
-        global $user;
+    public function formuleCloture(): int {
+        global $user, $langs;
         $Tformules = $this->fetchAll();
-        if (count($Tformules) > 0) {
+        if (is_array($Tformules) && count($Tformules) > 0) {
             $nbWeek = getDolGlobalInt('semainecloture');
+            if (empty($nbWeek)){
+                $this->output = $langs->trans('configNbWeek');
+                return 1;
+            }
             $dateLimite = new DateTime("-{$nbWeek} weeks");
             foreach ($Tformules as $obj) {
                 $timestamp = (int) $obj->date_creation;
@@ -1133,6 +1137,7 @@ class Formule extends CommonObject
                 if ($difference->days > $nbWeek * 7) {
                     $ret = $obj->delete($user);
                     if ($ret < 0){
+                        $this->output = $obj->error;
                         return 1;
                     }
                 }
