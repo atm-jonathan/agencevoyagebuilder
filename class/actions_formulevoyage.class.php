@@ -303,12 +303,8 @@ class ActionsFormulevoyage
      */
     public function emailElementlist($parameters) {
         global $hookmanager, $langs;
-        $hookmanager->resArray[$langs->trans('formule_send')] = img_picto('', 'plane', 'class="pictofixedwidth"').dol_escape_htmltag($langs->trans('formuleEmail'));
+        $hookmanager->resArray['formule_send'] = img_picto('', 'plane', 'class="pictofixedwidth"').dol_escape_htmltag($langs->trans('formuleEmail'));
         return 0;
-    }
-
-    public function getDefaultFromEmail ( $parameters, $formmail) {
-
     }
 
 	/* Add here any other hooked methods... */
