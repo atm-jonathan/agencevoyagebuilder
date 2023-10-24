@@ -89,6 +89,7 @@ $ref = GETPOST('ref', 'alpha');
 $lineid   = GETPOST('lineid', 'int');
 $id_propal   = GETPOST('id_propal', 'int');
 $action = GETPOST('action', 'aZ09');
+$withtoselected = GETPOST("receiver", 'array');
 $confirm = GETPOST('confirm', 'alpha');
 $cancel = GETPOST('cancel', 'aZ09');
 $contextpage = GETPOST('contextpage', 'aZ') ? GETPOST('contextpage', 'aZ') : str_replace('_', '', basename(dirname(__FILE__)).basename(__FILE__, '.php')); // To manage different context of search
@@ -233,6 +234,8 @@ if ($action == 'add') {
 
 
 
+
+
 /*
  * View
  */
@@ -332,7 +335,6 @@ if (($id || $ref) && $action == 'edit') {
 // Part to show record
 if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'create'))) {
 	$head = formulePrepareHead($object);
-
 	print dol_get_fiche_head($head, 'card', $langs->trans("Formule"), -1, $object->picto, 0, '', '', 0, '', 1);
 
 	$formconfirm = '';

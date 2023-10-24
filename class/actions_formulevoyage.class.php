@@ -297,5 +297,15 @@ class ActionsFormulevoyage
         }
     }
 
+    /**
+     * @param array $parameters
+     * @return int
+     */
+    public function emailElementlist($parameters) {
+        global $hookmanager, $langs;
+        $hookmanager->resArray['formule_send'] = img_picto('', 'plane', 'class="pictofixedwidth"').dol_escape_htmltag($langs->trans('formuleEmail'));
+        return 0;
+    }
+
 	/* Add here any other hooked methods... */
 }

@@ -107,9 +107,9 @@ if (!$permissiontoread) accessforbidden();
 if ($action == 'addcontact' && $permission) {
 	$contactid = (GETPOST('userid') ? GETPOST('userid', 'int') : GETPOST('contactid', 'int'));
 	$typeid = (GETPOST('typecontact') ? GETPOST('typecontact') : GETPOST('type'));
-	$result = $object->add_contact($contactid, $typeid, GETPOST("source", 'aZ09'));
+    $result = $object->add_contact($contactid, $typeid, GETPOST("source", 'aZ09'));
 
-	if ($result >= 0) {
+    if ($result >= 0) {
 		header("Location: ".$_SERVER['PHP_SELF']."?id=".$object->id);
 		exit;
 	} else {
@@ -211,7 +211,7 @@ if ($object->id) {
 	print dol_get_fiche_end();
 
 	print '<br>';
-
+    $hideaddcontactforuser = 1;
 	// Contacts lines (modules that overwrite templates must declare this into descriptor)
 	$dirtpls = array_merge($conf->modules_parts['tpl'], array('/core/tpl'));
 	foreach ($dirtpls as $reldir) {

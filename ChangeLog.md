@@ -2,8 +2,12 @@
 
 ## UNRELEASED
 
+## Version 1.9.0
+- NEW : Onglet contact formule de voyage - *1.9.0* - **18/10/2023**
+- NEW : Envoi de mail - *1.9.0* - **19/10/2023**
+
 ## Version 1.8.0
-- NEW : Gestion de l'import export - *1.7.0* - **16/10/2023**
+- NEW : Gestion de l'import export - *1.8.0* - **17/10/2023**
 - NEW : End point API - *1.7.0* - **16/10/2023**
 
 ## Version 1.7.0

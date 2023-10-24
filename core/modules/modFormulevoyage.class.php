@@ -72,7 +72,7 @@ class modFormulevoyage extends DolibarrModules
 		$this->editor_url = '';
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.8.0';
+		$this->version = '1.9.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 
@@ -118,6 +118,8 @@ class modFormulevoyage extends DolibarrModules
 				   'data' => array(
 				       'globalcard',
 				       'propalcard',
+                       'emailtemplates',
+                       'formmail'
 				   ),
 				   'entity' => '0',
 			),
@@ -179,7 +181,6 @@ class modFormulevoyage extends DolibarrModules
 		// Example:
 		// $this->tabs[] = array('data'=>'objecttype:+tabname1:Title1:mylangfile@formulevoyage:$user->rights->formulevoyage->read:/formulevoyage/mynewtab1.php?id=__ID__');  					// To add a new tab identified by code tabname1
 		// $this->tabs[] = array('data'=>'objecttype:+tabname2:SUBSTITUTION_Title2:mylangfile@formulevoyage:$user->rights->othermodule->read:/formulevoyage/mynewtab2.php?id=__ID__',  	// To add another new tab identified by code tabname2. Label will be result of calling all substitution functions on 'Title2' key.
-//		$this->tabs[] = array('data'=>'Formule:-Contacts');
 
 		//
 		// Where objecttype can be

@@ -196,8 +196,6 @@ if ($object->id > 0) {
 		$langs->load("mails");
 	}
 	$head = formulePrepareHead($object);
-
-
 	print dol_get_fiche_head($head, 'agenda', $langs->trans("Formule"), -1, $object->picto);
 
 	// Object card
