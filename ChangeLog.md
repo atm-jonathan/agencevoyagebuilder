@@ -1,6 +1,8 @@
 # ChangeLog for formulevoyage
 
 ## UNRELEASED
+## Version 1.10.0
+- NEW : Mise en place du CRONTAB - *1.10.0* - **23/10/2023**
 
 ## Version 1.9.0
 - NEW : Onglet contact formule de voyage - *1.9.0* - **18/10/2023**
